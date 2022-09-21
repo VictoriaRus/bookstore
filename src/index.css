@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Bebas Neue';
+    src: local('Bebas Neue'), url('./assets/fonts/BebasNeue-Regular.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helios';
+    src: local('Helios'), url('./assets/fonts/heliosbold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helios';
+    src: local('Helios'), url('./assets/fonts/helios.otf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helios';
+    src: local('Helios'), url('./assets/fonts/heliosbolditalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
