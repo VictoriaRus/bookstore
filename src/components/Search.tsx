@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import Zoom from '../assets/icons/Icon-Search.svg';
 
@@ -13,7 +13,7 @@ interface IInputProps extends ISearchProps {
 }
 
 const StyledSearch = styled.input<ISearchProps>`
-  width: ${props => props.width || "542"}px;
+  width: ${ props => props.width || "542" }px;
   border: 1px solid #E7E7E7;
   padding: 12px 20px 10px;
   font-size: 16px;
@@ -57,7 +57,7 @@ const StyledZoom = styled.button`
 
   &:before {
     content: "";
-    background-image: url("${Zoom}");
+    background-image: url("${ Zoom }");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -70,19 +70,19 @@ const StyledZoom = styled.button`
   }
 `;
 
-const Search = ({width, placeholder, }: IInputProps) => {
+const Search = ({ width, placeholder }: IInputProps) => {
     const [value, setValue] = useState('');
     return (
         <StyleWrap>
-            <StyledSearch width={width}
-                          placeholder={placeholder}
-                          value={value}
-                          onChange={(event) => {
+            <StyledSearch width={ width }
+                          placeholder={ placeholder }
+                          value={ value }
+                          onChange={ (event) => {
                               setValue(event.target.value);
-                          }}/>
-            <StyledZoom></StyledZoom>
+                          }}
+            />
+            <StyledZoom/>
         </StyleWrap>
-
     )
 }
 

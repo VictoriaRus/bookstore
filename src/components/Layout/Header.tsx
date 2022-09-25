@@ -33,7 +33,7 @@ const FlexHeader = styled(Flex)`
     background-color: #E7E7E7;
     display: block;
     position: absolute;
-    top: 84px;
+    bottom: -24px;
     left: 0;
   }
 `;

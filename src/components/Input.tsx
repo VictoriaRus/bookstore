@@ -12,7 +12,7 @@ interface IInputProps extends IStyleInputProps {
 }
 
 const StyleInput = styled.input<IStyleInputProps>`
-  width: ${props => props.width || "542"}px;
+  width: ${ props => props.width || "542" }px;
   border: 1px solid #E7E7E7;
   padding: 12px 20px 10px;
   font-size: 16px;
@@ -40,15 +40,15 @@ const StyleInput = styled.input<IStyleInputProps>`
   }
 `;
 
-const Search = ({width, placeholder,}: IInputProps) => {
+const Search = ({ width, placeholder }: IInputProps) => {
     const [value, setValue] = useState('');
     return (
-        <StyleInput width={width}
-                    placeholder={placeholder}
-                    value={value}
-                    onChange={(event) => {
+        <StyleInput width={ width }
+                    placeholder={ placeholder }
+                    value={ value }
+                    onChange={ (event) => {
                         setValue(event.target.value);
-                    }}/>
+                    } }/>
     )
 }
 

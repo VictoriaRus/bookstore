@@ -6,7 +6,6 @@ import Button from "../Button";
 import Input from "../Input";
 import Flex from "../../containers/Flex";
 
-
 const StyledSubscribe = styled.div`
   padding: 56px 64px;
   background: #F4EEFD;
@@ -21,20 +20,23 @@ const StyledSubscribe = styled.div`
 const Subscribe = () => {
     return (
         <StyledSubscribe>
-            <Title fontSize={"40"}
-                   lineHeight={"60"}
-                   mobileFontSize={"28"}
-                   mobileLineHeight={"40"}
-                   marginBottom={"0"}
-                   mobileMarginBottom={"14"}>Subscribe to Newsletter
+            <Title fontSize={ "40" }
+                   lineHeight={ "60" }
+                   mobileFontSize={ "28" }
+                   mobileLineHeight={ "40" }
+                   marginBottom={ "0" }
+                   mobileMarginBottom={ "14" }>
+                Subscribe to Newsletter
             </Title>
-            <SecondaryTitle>Be the first to know about new IT books, upcoming releases, exclusive offers and
-                more.</SecondaryTitle>
-            <Flex mobileFlexDirection={"column"}>
-                <Input width={"auto"} placeholder="Your email"/>
-                <Button width={"169"} mobileWidth={"148"}>Subscribe</Button>
+            <SecondaryTitle>
+                Be the first to know about new IT books, upcoming releases, exclusive offers and more.
+            </SecondaryTitle>
+            <Flex mobileFlexDirection={ "column" }>
+                <Input width={ "auto" } placeholder="Your email"/>
+                <Button width={ "169" } mobileWidth={ "148" }>
+                    Subscribe
+                </Button>
             </Flex>
-
         </StyledSubscribe>
     )
 }

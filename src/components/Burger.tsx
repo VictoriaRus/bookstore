@@ -14,7 +14,7 @@ const StyledBurger = styled.img`
 
 const Burger = ( ) => {
     return (
-        <StyledBurger src={BurgerIcon}/>
+        <StyledBurger src={ BurgerIcon }/>
     )
 }
 

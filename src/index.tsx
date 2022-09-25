@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {BrowserRouter} from "react-router-dom";
-import styled, {createGlobalStyle} from "styled-components";
+import { BrowserRouter } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
 
 const Global = createGlobalStyle`
   * {
@@ -13,7 +13,6 @@ const Global = createGlobalStyle`
     text-decoration: none;
     list-style: none;
     font-family: 'Helios', sans-serif;
-    
     color: #313037;
   }
 `
@@ -23,8 +22,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <BrowserRouter>
-        <Global/>
-        <App/>
+        <Global />
+        <App />
     </BrowserRouter>
 );
 

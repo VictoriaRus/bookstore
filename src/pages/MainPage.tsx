@@ -3,7 +3,7 @@ import Section from "../containers/Section";
 import Container from "../containers/Container";
 import Title from "../components/Title";
 import Subscribe from "../components/Subscribe/Subscribe";
-
+import BooksList from "../components/BooksList/BooksList";
 
 const MainPage = () => {
     return (
@@ -11,7 +11,7 @@ const MainPage = () => {
             <Section>
                 <Container>
                     <Title>New Releases Books</Title>
-
+                    <BooksList/>
                 </Container>
             </Section>
             <Section>
@@ -20,7 +20,6 @@ const MainPage = () => {
                 </Container>
             </Section>
         </>
-
     );
 }
 
