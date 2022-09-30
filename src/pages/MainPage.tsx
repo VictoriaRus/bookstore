@@ -14,6 +14,7 @@ const MainPage = () => {
                     <BooksList/>
                 </Container>
             </Section>
+
             <Section>
                 <Container>
                     <Subscribe/>

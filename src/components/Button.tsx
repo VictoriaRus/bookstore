@@ -4,6 +4,9 @@ import styled from "styled-components";
 interface IButtonProps {
     width?: string;
     mobileWidth?: string;
+}
+
+interface IChildrenProps extends IButtonProps{
     children?: React.ReactNode;
 }
 
@@ -35,7 +38,7 @@ const StyledButton = styled.button<IButtonProps>`
   }
 `;
 
-const Button = (props: IButtonProps ) => {
+const Button = (props: IChildrenProps ) => {
     return (
         <StyledButton { ...props } />
     )

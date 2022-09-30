@@ -15,15 +15,15 @@ const Global = createGlobalStyle`
     font-family: 'Helios', sans-serif;
     color: #313037;
   }
-`
+`;
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
+
 root.render(
     <BrowserRouter>
         <Global />
         <App />
     </BrowserRouter>
 );
-

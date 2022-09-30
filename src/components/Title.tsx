@@ -8,6 +8,9 @@ interface ITitleProps {
     mobileFontSize?: string;
     mobileLineHeight?: string;
     mobileMarginBottom?: string;
+}
+
+interface IChildrenProps extends ITitleProps {
     children?: React.ReactNode;
 }
 
@@ -26,7 +29,7 @@ const StyledTitle = styled.h2<ITitleProps>`
   }
 `;
 
-const Title = (props: ITitleProps ) => {
+const Title = ( props: IChildrenProps ) => {
     return (
         <StyledTitle { ...props } />
     )

@@ -10,7 +10,7 @@ import SearchPage from "./pages/SearchPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 
-function App() {
+const App = () => {
   return (
       <Routes>
           <Route element={ <Layout /> } >

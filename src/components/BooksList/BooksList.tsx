@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import CardBook from "./CardBook/CardBook";
+import NavPages from "./NavPages";
+
 
 interface IBooksListProps {
     children?: React.ReactNode;
 }
 
-const StyledBooksList = styled.div<IBooksListProps>`
+const StyledBooksList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  align-items: stretch;
+  align-content: stretch;
   margin: 0 -15px;
   position: relative;
 
@@ -26,27 +30,38 @@ const StyledBooksList = styled.div<IBooksListProps>`
 `;
 
 const BooksList = (props: IBooksListProps) => {
-    const [items, setItems] = useState<any[]>([]);
+    const [books, setBooks] = useState<any[]>([]);
+    const [activePage, setActivePage] = useState(1);
 
     useEffect(() => {
-        fetch("https://api.itbook.store/1.0/new")
+        fetch(`https://api.itbook.store/1.0/search/word-to-search/${activePage}`)
             .then(response => response.json())
-            .then(data => setItems(data.books))
-    }, [])
+            .then(data => {
+                setBooks(data.books);
+                setActivePage(data.page);
+            })
+    }, [activePage])
+
+    const updateData = (activePage: number) => {
+        setActivePage(activePage);
+    }
 
     return (
-        <StyledBooksList { ...props }>
-            <>
-                { items.map(item =>
-                    <CardBook key={ item.isbn13 }
-                              title={ item.title }
-                              image={ item.image }
-                              price={ item.price }
-                              subtitle={ item.subtitle }
-                    />
-                )}
-            </>
-        </StyledBooksList>
+        <>
+            <StyledBooksList {...props}>
+                <>
+                    {books.map(book =>
+                        <CardBook key={book.isbn13}
+                                  title={book.title}
+                                  image={book.image}
+                                  price={book.price}
+                                  subtitle={book.subtitle}
+                        />
+                    )}
+                </>
+            </StyledBooksList>
+            <NavPages updateData={updateData} activePage={activePage}/>
+        </>
     )
 }
 

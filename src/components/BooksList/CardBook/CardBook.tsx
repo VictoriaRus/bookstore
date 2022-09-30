@@ -12,18 +12,26 @@ interface ICardBookProps {
     price?: string;
     image?: string;
     color?: string;
-    children?: React.ReactNode;
 }
 
 const StyledCardBook = styled.div<ICardBookProps>`
-  width: 30%;
+  display: flex;
+  flex-direction: column;
+  width: calc(33.3333% - 30px);
   margin: 0 15px 48px;
   @media ( max-width: 768px ) {
-    width: 50%;
+    width: calc(50% - 30px);
   }
   @media ( max-width: 415px ) {
     width: 100%;
   }
+`;
+
+const CardWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 10;
 `;
 
 const ImgBook = styled.img`
@@ -46,38 +54,42 @@ const getColor = () => {
     return Math.floor(Math.random() * COLORS.length);
 }
 
-const BackgroundBook = styled.div<ICardBookProps>`
+const BackgroundBook = styled.div`
   width: 100%;
-  background-color: ${ props => props.color || '#D7E4FD' };
+  background-color: ${props => props.color || '#D7E4FD'};
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const CardBook = ({ title, subtitle, image, price }: ICardBookProps) => {
+const CardBook = ({title, subtitle, image, price}: ICardBookProps) => {
     return (
         <StyledCardBook>
-            <BackgroundBook color={ COLORS[getColor()] }>
-                <ImgBook src={ image }/>
+            <BackgroundBook color={COLORS[getColor()]}>
+                <ImgBook src={image}/>
             </BackgroundBook>
-            <Title fontSize={ "24" } lineHeight={ "32" } mobileFontSize={ "24" } mobileLineHeight={ "32" }>
-                { title }
-            </Title>
-            <SecondaryTitle>{ subtitle }</SecondaryTitle>
-            <Flex>
-                <Title fontSize={ "24" } lineHeight={ "32" } mobileFontSize={ "24" } mobileLineHeight={ "32" }
-                       marginBottom={ "0" } mobileMarginBottom={ "0" }>
-                    { price }
+            <CardWrap>
+                <Title fontSize={"24"} lineHeight={"32"} mobileFontSize={"24"} mobileLineHeight={"32"}>
+                    {title}
                 </Title>
-                <div>
-                    <ImgStar src={ Star }/>
-                    <ImgStar src={ Star }/>
-                    <ImgStar src={ Star }/>
-                    <ImgStar src={ Star }/>
-                    <img src={ StarDis }/>
-                </div>
-            </Flex>
+                <CardWrap>
+                    <SecondaryTitle>{subtitle}</SecondaryTitle>
+                    <Flex>
+                        <Title fontSize={"24"} lineHeight={"32"} mobileFontSize={"24"} mobileLineHeight={"32"}
+                               marginBottom={"0"} mobileMarginBottom={"0"}>
+                            {price}
+                        </Title>
+                        <div>
+                            <ImgStar src={Star}/>
+                            <ImgStar src={Star}/>
+                            <ImgStar src={Star}/>
+                            <ImgStar src={Star}/>
+                            <img src={StarDis}/>
+                        </div>
+                    </Flex>
+                </CardWrap>
+            </CardWrap>
         </StyledCardBook>
     )
 }
