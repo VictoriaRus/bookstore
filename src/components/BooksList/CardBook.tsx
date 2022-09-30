@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
-import Title from "../../Title";
-import SecondaryTitle from "../../SecondaryTitle";
-import Star from '../../../assets/icons/Star.png';
-import StarDis from '../../../assets/icons/StarDis.png';
-import Flex from "../../../containers/Flex";
+import Title from "../Title";
+import SecondaryTitle from "../SecondaryTitle";
+import Star from '../../assets/icons/Star.png';
+import StarDis from '../../assets/icons/StarDis.png';
+import Flex from "../../containers/Flex";
 
 interface ICardBookProps {
     title?: string;
@@ -63,22 +63,22 @@ const BackgroundBook = styled.div`
   align-items: center;
 `;
 
-const CardBook = ({title, subtitle, image, price}: ICardBookProps) => {
+const CardBook = ({ title, subtitle, image, price }: ICardBookProps) => {
     return (
         <StyledCardBook>
-            <BackgroundBook color={COLORS[getColor()]}>
-                <ImgBook src={image}/>
+            <BackgroundBook color={ COLORS[getColor()] }>
+                <ImgBook src={ image }/>
             </BackgroundBook>
             <CardWrap>
-                <Title fontSize={"24"} lineHeight={"32"} mobileFontSize={"24"} mobileLineHeight={"32"}>
-                    {title}
+                <Title fontSize="24" lineHeight="32" mobileFontSize="24" mobileLineHeight="32">
+                    { title }
                 </Title>
                 <CardWrap>
                     <SecondaryTitle>{subtitle}</SecondaryTitle>
                     <Flex>
-                        <Title fontSize={"24"} lineHeight={"32"} mobileFontSize={"24"} mobileLineHeight={"32"}
-                               marginBottom={"0"} mobileMarginBottom={"0"}>
-                            {price}
+                        <Title fontSize="24" lineHeight="32" mobileFontSize="24" mobileLineHeight="32"
+                               marginBottom="0" mobileMarginBottom="0">
+                            { price }
                         </Title>
                         <div>
                             <ImgStar src={Star}/>

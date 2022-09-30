@@ -29,7 +29,7 @@ const Tab = styled.button`
 `;
 
 const TextBut = styled.span<IButtonProps>`
-  color: ${props => props.isActive ? "#313037" : "#A8A8A8"};
+  color: ${ props => props.isActive ? "#313037" : "#A8A8A8" };
   @media ( max-width: 415px ) {
     display: none;
   }
@@ -69,19 +69,19 @@ const Pagination = (props: IChildrenProps) => {
     return <StyleNavPages>{props.children}</StyleNavPages>
 }
 
-interface INavPagesProps {
+interface INavPagesProps{
     activePage: number;
     updateData: (activePage: number) => void;
 }
 
-const NavPages = ({activePage: initialValue, updateData}: INavPagesProps) => {
+const NavPages = ({ activePage: initialValue, updateData }: INavPagesProps) => {
     const [activePage, setActivePage] = useState(initialValue);
     let pagesCount = 100;
     let pages: number[] = [];
 
-    useEffect(()=>{
+    useEffect(() => {
         updateData(activePage);
-    },[activePage]);
+    }, [activePage]);
 
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
@@ -95,7 +95,7 @@ const NavPages = ({activePage: initialValue, updateData}: INavPagesProps) => {
         setActivePage(activePage - 1);
     }
 
-    const getNumberPage = (condition: any) => {
+    const getNumberPage = (condition: (activePage: number) => void) => {
         return pages.filter(condition).map(page => (
             <PaginationBtn key={page} isActive={page === activePage} onClick={() => setActivePage(page)}>
                 {page}
@@ -110,41 +110,41 @@ const NavPages = ({activePage: initialValue, updateData}: INavPagesProps) => {
                 <TextBut isActive={!(activePage === 1)}>Prev</TextBut>
             </Tab>
             <div>
-                { (activePage <= 3 || activePage > (pages.length - 3)) ?
+                {(activePage <= 3 || activePage > (pages.length - 3)) ?
                     <>
                         {
                             (activePage < 3) &&
-                            getNumberPage((page: any) => page <= 3)
+                            getNumberPage((page: number) => page <= 3)
                         }
                         {
                             (activePage === 3) &&
-                            getNumberPage((page: any) => page <= 4)
+                            getNumberPage((page: number) => page <= 4)
                         }
                         {
                             (activePage === (pages.length - 2) || activePage === (pages.length - 1) || activePage === pages.length) &&
-                            getNumberPage((page: any) => page === 1)
+                            getNumberPage((page: number) => page === 1)
                         }
                         ...
                         {
                             (activePage <= 4) &&
-                            getNumberPage((page: any) => page === pages.length)
+                            getNumberPage((page: number) => page === pages.length)
                         }
                         {
                             (activePage === (pages.length - 2)) &&
-                            getNumberPage((page: any) => page >= (pages.length - 3))
+                            getNumberPage((page: number) => page >= (pages.length - 3))
                         }
                         {
                             (activePage === (pages.length - 1) || activePage === pages.length) &&
-                            getNumberPage((page: any) => page >= (pages.length - 2))
+                            getNumberPage((page: number) => page >= (pages.length - 2))
                         }
                     </>
                     :
                     <>
-                        { getNumberPage((page: any) => page === 1) }
+                        {getNumberPage((page: number) => page === 1)}
                         ...
-                        {getNumberPage((page: any) => page === pages[activePage - 2] || page === pages[activePage - 1] || page === pages[activePage])}
+                        {getNumberPage((page: number) => page === pages[activePage - 2] || page === pages[activePage - 1] || page === pages[activePage])}
                         ...
-                        {getNumberPage((page: any) => page === pages.length)}
+                        {getNumberPage((page: number) => page === pages.length)}
                     </>
                 }
             </div>
