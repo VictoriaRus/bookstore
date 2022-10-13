@@ -22,7 +22,7 @@ const StyledTitle = styled.h2<ITitleProps>`
   line-height: ${ props => props.lineHeight || "64" }px;
   margin-bottom: ${ props => props.marginBottom || "48" }px;
   color: #313037;
-  @media ( max-width: 415px ) {
+  @media ( max-width: 768px ) {
     font-size: ${ props => props.mobileFontSize || "32" }px;
     line-height: ${ props => props.mobileLineHeight || "44" }px;
     margin-bottom: ${ props => props.mobileMarginBottom || "36" }px;

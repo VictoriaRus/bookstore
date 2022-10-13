@@ -1,26 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
-import {Link} from "react-router-dom";
-import Search from "../Search";
 import Container from "../../containers/Container";
 import Flex from "../../containers/Flex";
-import Logo from "../Logo";
-
-import Bag from '../../assets/icons/Bag.svg';
-import Like from '../../assets/icons/Like.svg';
-import User from '../../assets/icons/User.svg';
-import Burger from "../Burger";
+import useWindowSize from "../../hooks/useWindowSize";
+import NavDesktop from "./NavDesktop";
+import NavTablet from "./NavTablet";
+import MenuBurgerTablet from "./Burger/MenuBurgerTablet";
+import MenuBurgerMobile from "./Burger/MenuBurgerMobile";
 
 const StyledHeader = styled.div`
+  position: relative;
   padding: 24px 0;
-`;
-
-const StyledIcon = styled.img`
-  padding-right: 8px;
-
-  &:last-child {
-    padding-right: 0;
-  }
 `;
 
 const FlexHeader = styled(Flex)`
@@ -38,29 +28,28 @@ const FlexHeader = styled(Flex)`
   }
 `;
 
-const Nav = styled(Flex)`
-  @media ( max-width: 906px ) {
-    display: none;
-  }
-`;
-
 const Header = () => {
+    const size = useWindowSize();
+    const [isShow, setIsShow] = useState(false);
+    const onBurger = (value: boolean) => {
+        setIsShow(value);
+    }
     return (
         <StyledHeader>
             <Container>
                 <FlexHeader>
-                    <Link to="/"><Logo>BOOKSTORE</Logo></Link>
-                    <Nav><Search placeholder="Search"/></Nav>
-                    <Flex>
-                        <Link to="/cart"><StyledIcon src={ Bag }/></Link>
-                        <Nav>
-                            <Link to="/favorites"><StyledIcon src={ Like }/></Link>
-                            <Link to="/account"><StyledIcon src={ User }/></Link>
-                        </Nav>
-                        <Link to="/"><Burger/></Link>
-                    </Flex>
+                    {
+                        size.width > 768 ? <NavDesktop/> : <NavTablet onBurger={onBurger}/>
+                    }
                 </FlexHeader>
             </Container>
+            {
+                isShow && <>
+                    {
+                        size.width > 414 ? <MenuBurgerTablet onBurger={onBurger}/> : <MenuBurgerMobile onBurger={onBurger}/>
+                    }
+                </>
+            }
         </StyledHeader>
     );
 }

@@ -16,7 +16,7 @@ const App = () => {
           <Route element={ <Layout /> } >
               <Route path='/' element={ <Navigate replace to="/main" /> } />
               <Route path='/main' element={ <MainPage /> } />
-              <Route path='/book' element={ <BookPage /> } />
+              <Route path='/book/:isbn13' element={ <BookPage /> } />
               <Route path='/cart' element={ <CartPage /> } />
               <Route path='/favorites' element={ <FavoritesPage /> } />
               <Route path='/account' element={ <AccountPage /> } />
@@ -24,6 +24,7 @@ const App = () => {
               <Route path='/sign-in' element={ <SignInPage /> } />
               <Route path='/sign-up' element={ <SignUpPage /> } />
           </Route>
+          <Route path='*' element={ <p>Page not found</p> } />
       </Routes>
   );
 }

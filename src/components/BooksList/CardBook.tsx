@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
-import Title from "../Title";
-import SecondaryTitle from "../SecondaryTitle";
+import Title from "../common-components/Title";
+import SecondaryTitle from "../common-components/SecondaryTitle";
 import Star from '../../assets/icons/Star.png';
 import StarDis from '../../assets/icons/StarDis.png';
 import Flex from "../../containers/Flex";
+import {Link} from "react-router-dom";
 
 interface ICardBookProps {
     title?: string;
@@ -12,6 +13,7 @@ interface ICardBookProps {
     price?: string;
     image?: string;
     color?: string;
+    isbn13?: number;
 }
 
 const StyledCardBook = styled.div<ICardBookProps>`
@@ -63,29 +65,31 @@ const BackgroundBook = styled.div`
   align-items: center;
 `;
 
-const CardBook = ({ title, subtitle, image, price }: ICardBookProps) => {
+const CardBook = ({ title, subtitle, image, price, isbn13 }: ICardBookProps) => {
+    const stars = [<ImgStar src={Star}/>, <ImgStar src={Star}/>, <ImgStar src={Star}/>, <ImgStar src={Star}/>, <img src={StarDis}/>];
+
     return (
         <StyledCardBook>
             <BackgroundBook color={ COLORS[getColor()] }>
                 <ImgBook src={ image }/>
             </BackgroundBook>
             <CardWrap>
-                <Title fontSize="24" lineHeight="32" mobileFontSize="24" mobileLineHeight="32">
-                    { title }
-                </Title>
+
+                <Link to={`/book/${isbn13}`}>
+                    <Title fontSize="24" lineHeight="32" mobileFontSize="24" mobileLineHeight="32">
+                        { title }
+                    </Title>
+                </Link>
+
                 <CardWrap>
-                    <SecondaryTitle>{subtitle}</SecondaryTitle>
+                    <SecondaryTitle>{ subtitle }</SecondaryTitle>
                     <Flex>
                         <Title fontSize="24" lineHeight="32" mobileFontSize="24" mobileLineHeight="32"
                                marginBottom="0" mobileMarginBottom="0">
                             { price }
                         </Title>
                         <div>
-                            <ImgStar src={Star}/>
-                            <ImgStar src={Star}/>
-                            <ImgStar src={Star}/>
-                            <ImgStar src={Star}/>
-                            <img src={StarDis}/>
+                            { stars }
                         </div>
                     </Flex>
                 </CardWrap>

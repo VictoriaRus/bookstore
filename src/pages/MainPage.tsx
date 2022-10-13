@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Section from "../containers/Section";
 import Container from "../containers/Container";
-import Title from "../components/Title";
+import Title from "../components/common-components/Title";
 import Subscribe from "../components/Subscribe/Subscribe";
 import BooksList from "../components/BooksList/BooksList";
 import NavPages from "../components/BooksList/NavPages";
@@ -18,9 +18,10 @@ interface IBooksState {
 const MainPage = () => {
     const [books, setBooks] = useState<IBooksState[]>([]);
     const [activePage, setActivePage] = useState(1);
+    const url = 'https://api.itbook.store/1.0/search/word-to-search/';
 
     useEffect(() => {
-        fetch(`https://api.itbook.store/1.0/search/word-to-search/${ activePage }`)
+        fetch(`${url}${ activePage }`)
             .then(response => response.json())
             .then(data => {
                 setBooks(data.books);

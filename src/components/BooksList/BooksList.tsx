@@ -41,6 +41,7 @@ const BooksList = ({ books }: IBooksProps) => {
         <StyledBooksList>
             { books.map(book =>
                 <CardBook key={ book.isbn13 }
+                          isbn13={ book.isbn13 }
                           title={ book.title }
                           image={ book.image }
                           price={ book.price }

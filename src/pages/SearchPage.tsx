@@ -1,7 +1,7 @@
 import React from 'react';
 import Section from "../containers/Section";
 import Container from "../containers/Container";
-import Title from "../components/Title";
+import Title from "../components/common-components/Title";
 
 const SearchPage = () => {
     return (

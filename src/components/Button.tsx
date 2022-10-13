@@ -31,7 +31,7 @@ const StyledButton = styled.button<IButtonProps>`
     background-color: #5B5A62;;
   }
   @media ( max-width: 768px ) {
-    width:  ${ props => props.mobileWidth || "448px" }px;
+    width:  ${ props => props.mobileWidth || "448" }px;
   }
   @media ( max-width: 415px ) {
     width: 100%;

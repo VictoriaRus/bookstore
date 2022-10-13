@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
+import {BrowserRouter} from "react-router-dom";
+import {createGlobalStyle} from "styled-components";
+import {Provider} from "react-redux";
+import store from "./redux/store/store";
 
 const Global = createGlobalStyle`
   * {
@@ -23,7 +25,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <BrowserRouter>
-        <Global />
-        <App />
+        <Provider store={store}>
+            <Global/>
+            <App/>
+        </Provider>
     </BrowserRouter>
 );

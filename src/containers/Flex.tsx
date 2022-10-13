@@ -7,6 +7,7 @@ interface IFlexProps {
     alignItems?: string;
     justifyContent?: string;
     mobileFlexDirection?: string;
+    tabletFlexDirection?: string;
 }
 
 const StyledFlex = styled.div<IFlexProps>`
@@ -14,6 +15,9 @@ const StyledFlex = styled.div<IFlexProps>`
   flex-direction: ${ props => props.flexDirection || "row" };
   align-items: ${ props => props.alignItems || "center" };
   justify-content: ${ props => props.justifyContent || "space-between" };
+  @media ( max-width: 768px ) {
+    flex-direction: ${ props => props.tabletFlexDirection || "row" };
+  }
   @media ( max-width: 415px ) {
     flex-direction: ${ props => props.mobileFlexDirection || "row" };
   }

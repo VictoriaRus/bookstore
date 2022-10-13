@@ -52,7 +52,7 @@ const StyledZoom = styled.button`
   padding: 0;
   position: absolute;
   top: 18px;
-  left: 500px;
+  right: 20px;
   cursor: pointer;
 
   &:before {
