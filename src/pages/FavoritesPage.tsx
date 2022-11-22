@@ -1,6 +1,6 @@
 import React from 'react';
-import Section from "../containers/Section";
-import Container from "../containers/Container";
+import Section from "../components/common-components/Section";
+import Container from "../components/common-components/Container";
 import Title from "../components/common-components/Title";
 
 const FavoritesPage = () => {

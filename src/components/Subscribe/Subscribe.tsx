@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import Title from "../common-components/Title";
 import SecondaryTitle from "../common-components/SecondaryTitle";
-import Button from "../Button";
-import Input from "../Input";
-import Flex from "../../containers/Flex";
+import Button from "../common-components/Button";
+import Input from "../common-components/Input";
+import Flex from "../common-components/Flex";
 
 const StyledSubscribe = styled.div`
   padding: 56px 64px;
@@ -18,24 +18,23 @@ const StyledSubscribe = styled.div`
 `;
 
 const Subscribe = () => {
+    const [text, setText] = useState('');
+
+    const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setText(e.target.value);
+    }
+
     return (
         <StyledSubscribe>
-            <Title fontSize={ "40" }
-                   lineHeight={ "60" }
-                   mobileFontSize={ "28" }
-                   mobileLineHeight={ "40" }
-                   marginBottom={ "0" }
-                   mobileMarginBottom={ "14" }>
+            <Title fontSize="40" lineHeight="60" mobileFontSize="28" mobileLineHeight="40" marginBottom="0" mobileMarginBottom="14">
                 Subscribe to Newsletter
             </Title>
             <SecondaryTitle>
                 Be the first to know about new IT books, upcoming releases, exclusive offers and more.
             </SecondaryTitle>
-            <Flex mobileFlexDirection={ "column" }>
-                <Input width={ "auto" } placeholder="Your email"/>
-                <Button width={ "169" } mobileWidth={ "148" }>
-                    Subscribe
-                </Button>
+            <Flex mobileFlexDirection="column">
+                <Input width="auto" placeholder="Your email" value={ text } onChange={ onTextChange }/>
+                <Button width="169" mobileWidth="148" text="Subscribe"/>
             </Flex>
         </StyledSubscribe>
     )

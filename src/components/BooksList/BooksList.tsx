@@ -37,6 +37,7 @@ interface IBooksProps {
 }
 
 const BooksList = ({ books }: IBooksProps) => {
+
     return (
         <StyledBooksList>
             { books.map(book =>

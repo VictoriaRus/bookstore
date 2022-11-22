@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
-import Close from "../../../assets/icons/close.svg";
-import Search from "../../Search";
-import {Link} from "react-router-dom";
+import React from 'react';
+import Search from "../../common-components/Search";
+import { Link } from "react-router-dom";
 import Title from "../../common-components/Title";
-import Button from "../../Button";
+import Button from "../../common-components/Button";
 import styled from "styled-components";
-import Logo from "../../Logo";
+import Logo from "../../common-components/Logo";
 import Bag from "../../../assets/icons/Bag.svg";
-import {StyledIcon} from "../NavDesktop";
-import {INavTabletProps} from "../NavTablet";
+import { StyledIcon } from "../NavDesktop";
 
 const MenuStyled = styled.div`
   position: absolute;
@@ -50,8 +48,7 @@ const LinksStyled = styled.div`
   text-align: center;
 `;
 
-const MenuBurgerMobile = (props: INavTabletProps) => {
-    const [isShow, setIsShow] = useState(false);
+const MenuBurgerMobile = () => {
     return (
         <MenuStyled>
             <div>
@@ -61,17 +58,11 @@ const MenuBurgerMobile = (props: INavTabletProps) => {
                     </Link>
                     <div>
                         <Link to="/cart">
-                            <StyledIcon src={Bag} alt="bag"/>
+                            <StyledIcon src={ Bag } alt="bag"/>
                         </Link>
-
-                        <img src={Close} alt="close" onClick={() => {
-                            props.onBurger(isShow);
-                        }}/>
-
                     </div>
                 </CloseWrapStyled>
                 <Search width="287" placeholder="Search"/>
-
                 <LinksStyled>
                     <Link to="/cart">
                         <Title mobileFontSize="32" mobileMarginBottom="48">Favorites</Title>
@@ -80,13 +71,10 @@ const MenuBurgerMobile = (props: INavTabletProps) => {
                         <Title mobileFontSize="32">Cart</Title>
                     </Link>
                 </LinksStyled>
-
             </div>
-
-            <Button mobileWidth="288">log out</Button>
-
+            <Button mobileWidth="288" text="log out"/>
         </MenuStyled>
     );
 };
 
-export default MenuBurgerMobile;
+export default React.memo(MenuBurgerMobile);

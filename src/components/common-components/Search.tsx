@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import Zoom from '../assets/icons/Icon-Search.svg';
+import Zoom from '../../assets/icons/Icon-Search.svg';
 
 interface ISearchProps {
     width?: string;

@@ -1,8 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import Title from "../common-components/Title";
-import Flex from "../../containers/Flex";
+import Flex from "../common-components/Flex";
 import styled from "styled-components";
-import Button from "../Button";
+import Button from "../common-components/Button";
+import Star from "../../assets/icons/Star.png";
+import StarDis from "../../assets/icons/StarDis.png";
+import DescriptionBook from "./DescriptionBook";
+import Like from "./Like";
+import Back from "./Back";
 
 interface IColumnProps {
     width: string;
@@ -10,6 +15,7 @@ interface IColumnProps {
 
 const ColumnStyled = styled.div<IColumnProps>`
   width: ${props => props.width}px;
+  text-align: center;
   @media ( max-width: 768px ) {
     width: 100%;
   }
@@ -23,6 +29,7 @@ const ItemStyled = styled.div`
 const WrapBookStyled = styled.div`
   padding: 40px 0 59px 0;
   position: relative;
+
   &::after {
     content: "";
     height: 1px;
@@ -30,9 +37,10 @@ const WrapBookStyled = styled.div`
     background-color: #E7E7E7;
     display: block;
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
   }
+
   @media ( max-width: 768px ) {
     padding: 40px 0 48px 0;
   }
@@ -54,21 +62,9 @@ const BookInfoStyled = styled.span`
   color: #A8A8A8;
 `;
 
-const SelectStyled = styled.select`
-  border: none;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-`;
-
-const TextStyled= styled.p`
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 200%;
-`;
 
 const ImgBook = styled.img`
-  width:300px;
+  width: 300px;
   padding: 61px 0;
   @media ( max-width: 768px ) {
     width: 300px;
@@ -82,13 +78,18 @@ const ImgBook = styled.img`
 
 const BackgroundBook = styled.div`
   width: 100%;
-  background-color: #D7E4FD;
+  background-color: #FEE9E2;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   @media ( max-width: 768px ) {
     margin-bottom: 20px;
   }
+`;
+
+const WrapButton = styled.div`
+  margin-bottom: 40px;
 `;
 
 interface IBookState {
@@ -116,40 +117,44 @@ interface IBookProps {
     isbn13: string | undefined;
 }
 
-const Book = ({isbn13}: IBookProps) => {
+const Book = ({ isbn13 }: IBookProps) => {
     const [book, setBook] = useState<IBookState>({});
     const url = 'https://api.itbook.store/1.0/books/';
 
     useEffect(() => {
-        fetch(`${url}${isbn13}`)
+        fetch(`${ url }${ isbn13 }`)
             .then(response => response.json())
             .then(book => {
                 setBook(book);
             })
     }, [])
 
+    const stars = [<img src={Star}/>, <img src={Star}/>, <img src={Star}/>, <img src={Star}/>, <img src={StarDis}/>];
+
     return (
         <>
-            <Title>{book.title}</Title>
-            <Flex mobileFlexDirection="column" tabletFlexDirection="column">
+            <Back />
+            <Title>{ book.title }</Title>
+            <Flex mobileFlexDirection="column" tabletFlexDirection="column" alignItems="stretch">
                 <ColumnStyled width="544">
                     <BackgroundBook>
-                        <ImgBook src={book.image}/>
+                        <ImgBook src={ book.image }/>
+                        <Like />
                     </BackgroundBook>
                 </ColumnStyled>
                 <ColumnStyled width="448">
                     <WrapBookStyled>
                         <ItemStyled>
-                            <Title fontSize="40" lineHeight="60" marginBottom="24">{book.price}</Title>
-                            <span></span>
+                            <Title fontSize="40" lineHeight="60" marginBottom="24">{ book.price }</Title>
+                            <span>{ stars }</span>
                         </ItemStyled>
                         <ItemStyled>
                             <BookInfoStyled>Authors</BookInfoStyled>
-                            <InfoStyled>{book.authors}</InfoStyled>
+                            <InfoStyled>{ book.authors }</InfoStyled>
                         </ItemStyled>
                         <ItemStyled>
                             <BookInfoStyled>Publisher</BookInfoStyled>
-                            <InfoStyled>{book.publisher}, {book.year}</InfoStyled>
+                            <InfoStyled>{ book.publisher }, {book.year}</InfoStyled>
                         </ItemStyled>
                         <ItemStyled>
                             <BookInfoStyled>Language</BookInfoStyled>
@@ -159,22 +164,14 @@ const Book = ({isbn13}: IBookProps) => {
                             <BookInfoStyled>Format</BookInfoStyled>
                             <InfoStyled>Paper book / ebook (PDF)</InfoStyled>
                         </ItemStyled>
-
-                        <SelectStyled name="book_profile">
-                            <option value="">More details</option>
-                            <option value="1">option 1</option>
-                            <option value="2">option 2</option>
-                            <option value="3">option 3</option>
-                        </SelectStyled>
                     </WrapBookStyled>
-
-                    <Button>add to cart</Button>
-                    <div>Preview book</div>
+                    <WrapButton>
+                        <Button text="add to cart"/>
+                    </WrapButton>
+                    <InfoStyled>Preview book</InfoStyled>
                 </ColumnStyled>
             </Flex>
-            <div>
-                <TextStyled>{book.desc}</TextStyled>
-            </div>
+            <DescriptionBook desc={ book.desc } authors={ book.authors }/>
         </>
     );
 };

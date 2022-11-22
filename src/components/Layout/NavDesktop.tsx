@@ -1,12 +1,12 @@
 import React from 'react';
-import Search from "../Search";
-import Flex from "../../containers/Flex";
+import Search from "../common-components/Search";
+import Flex from "../common-components/Flex";
 import { Link } from "react-router-dom";
 import Bag from "../../assets/icons/Bag.svg";
 import Like from "../../assets/icons/Like.svg";
 import User from "../../assets/icons/User.svg";
 import styled from "styled-components";
-import Logo from "../Logo";
+import Logo from "../common-components/Logo";
 
 export const StyledIcon = styled.img`
   padding-right: 8px;

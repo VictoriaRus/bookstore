@@ -1,16 +1,13 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-import Burger from "./Burger/Burger";
-import Flex from "../../containers/Flex";
+import { Link } from "react-router-dom";
+import Burger, { IBurgerProps } from "./Burger/Burger";
+import Flex from "../common-components/Flex";
 import Bag from "../../assets/icons/Bag.svg";
-import {StyledIcon} from "./NavDesktop";
-import Logo from "../Logo";
+import { StyledIcon } from "./NavDesktop";
+import Logo from "../common-components/Logo";
 
- export interface INavTabletProps{
-    onBurger: (value: boolean)=>void;
-}
+const NavTablet = ({ handledBurger }:IBurgerProps) => {
 
-const NavTablet = (props:INavTabletProps) => {
     return (
         <>
             <Link to="/">
@@ -18,12 +15,12 @@ const NavTablet = (props:INavTabletProps) => {
             </Link>
             <Flex>
                 <Link to="/cart">
-                    <StyledIcon src={Bag}/>
+                    <StyledIcon src={ Bag } />
                 </Link>
-                <Burger onBurger={props.onBurger}/>
+                <Burger handledBurger={ handledBurger } />
             </Flex>
         </>
     );
 };
 
-export default NavTablet;
+export default React.memo(NavTablet);

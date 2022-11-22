@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import Button from "../../Button";
+import Button from "../../common-components/Button";
 import {Link} from "react-router-dom";
 import Title from "../../common-components/Title";
-import Search from "../../Search";
-import Close from "../../../assets/icons/close.svg";
-import {INavTabletProps} from "../NavTablet";
+import Search from "../../common-components/Search";
 
 const BackStyled = styled.div`
   position: absolute;
@@ -30,9 +28,9 @@ const MenuStyled = styled.div`
   right: 0;
 `;
 
-const CloseWrapStyled = styled.div`
+const BurgerHeader = styled.div`
   text-align: right;
-  padding-bottom: 24px;
+  padding-bottom: 85px;
   margin-bottom: 56px;
   position: relative;
 
@@ -53,21 +51,14 @@ const LinksStyled = styled.div`
   text-align: center;
 `;
 
-const MenuBurgerTablet = (props: INavTabletProps) => {
-    const [isShow, setIsShow] = useState(false);
+const MenuBurgerTablet = () => {
+
     return (
         <BackStyled>
             <MenuStyled>
                 <div>
-                    <CloseWrapStyled>
-
-                        <img src={Close} alt="close" onClick={() => {
-                            props.onBurger(isShow);
-                        }}/>
-
-                    </CloseWrapStyled>
-                    <Search width="287" placeholder="Search"/>
-
+                    <BurgerHeader/>
+                    <Search width="287" placeholder="Search" />
                     <LinksStyled>
                         <Link to="/cart">
                             <Title mobileFontSize="32" mobileMarginBottom="48">Favorites</Title>
@@ -76,14 +67,11 @@ const MenuBurgerTablet = (props: INavTabletProps) => {
                             <Title mobileFontSize="32">Cart</Title>
                         </Link>
                     </LinksStyled>
-
                 </div>
-
-                <Button mobileWidth="288">log out</Button>
-
+                <Button mobileWidth="288" text="log out"/>
             </MenuStyled>
         </BackStyled>
     );
 };
 
-export default MenuBurgerTablet;
+export default React.memo(MenuBurgerTablet);

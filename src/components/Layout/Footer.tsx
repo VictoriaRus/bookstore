@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import Container from "../../containers/Container";
-import Flex from "../../containers/Flex";
+import Container from "../common-components/Container";
+import Flex from "../common-components/Flex";
 
 const StyledFooter = styled.div`
   padding: 35px 0;

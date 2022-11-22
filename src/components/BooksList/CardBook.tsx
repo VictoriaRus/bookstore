@@ -4,7 +4,7 @@ import Title from "../common-components/Title";
 import SecondaryTitle from "../common-components/SecondaryTitle";
 import Star from '../../assets/icons/Star.png';
 import StarDis from '../../assets/icons/StarDis.png';
-import Flex from "../../containers/Flex";
+import Flex from "../common-components/Flex";
 import {Link} from "react-router-dom";
 
 interface ICardBookProps {

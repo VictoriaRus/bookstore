@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import Container from "../../containers/Container";
-import Flex from "../../containers/Flex";
+import Container from "../common-components/Container";
+import Flex from "../common-components/Flex";
 import useWindowSize from "../../hooks/useWindowSize";
 import NavDesktop from "./NavDesktop";
 import NavTablet from "./NavTablet";
 import MenuBurgerTablet from "./Burger/MenuBurgerTablet";
 import MenuBurgerMobile from "./Burger/MenuBurgerMobile";
+import { useLocation } from "react-router";
 
 const StyledHeader = styled.div`
   position: relative;
@@ -30,25 +31,28 @@ const FlexHeader = styled(Flex)`
 
 const Header = () => {
     const size = useWindowSize();
-    const [isShow, setIsShow] = useState(false);
-    const onBurger = (value: boolean) => {
-        setIsShow(value);
+    const location = useLocation();
+    const [isOpenMenu, setIsOpenMenu] = useState(true);
+
+    useEffect(() => {
+        setIsOpenMenu(false);
+    }, [location]);
+
+    const handledBurger = () => {
+        setIsOpenMenu(prevState => !prevState);
     }
+
     return (
         <StyledHeader>
             <Container>
                 <FlexHeader>
                     {
-                        size.width > 768 ? <NavDesktop/> : <NavTablet onBurger={onBurger}/>
+                        size.width > 768 ? <NavDesktop /> : <NavTablet handledBurger={ handledBurger } />
                     }
                 </FlexHeader>
             </Container>
-            {
-                isShow && <>
-                    {
-                        size.width > 414 ? <MenuBurgerTablet onBurger={onBurger}/> : <MenuBurgerMobile onBurger={onBurger}/>
-                    }
-                </>
+            { isOpenMenu &&
+                (size.width > 414 ? <MenuBurgerTablet /> : <MenuBurgerMobile />)
             }
         </StyledHeader>
     );
