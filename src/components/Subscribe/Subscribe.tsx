@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import Title from "../common-components/Title";
-import SecondaryTitle from "../common-components/SecondaryTitle";
-import Button from "../common-components/Button";
-import Input from "../common-components/Input";
-import Flex from "../common-components/Flex";
+import Title from "../common-components/Title/Title";
+import SecondaryTitle from "../common-components/SecondaryTitle/SecondaryTitle";
+import Button from "../common-components/Button/Button";
+import Input from "../common-components/Input/Input";
+import Flex from "../common-components/Flex/Flex";
 
 const StyledSubscribe = styled.div`
   padding: 56px 64px;
@@ -18,11 +18,11 @@ const StyledSubscribe = styled.div`
 `;
 
 const Subscribe = () => {
-    const [text, setText] = useState('');
+    const [text, setText] = useState("");
 
-    const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onTextChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setText(e.target.value);
-    }
+    }, []);
 
     return (
         <StyledSubscribe>
@@ -40,4 +40,4 @@ const Subscribe = () => {
     )
 }
 
-export default Subscribe;
+export default React.memo(Subscribe);

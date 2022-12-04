@@ -1,7 +1,7 @@
-import {Reducer} from "redux";
-import {AuthActionType} from "../../actions/authActionCreators/authActionCreators";
-import {AUTH_LOADING, GET_LOGIN_DATA_FAILURE, GET_LOGIN_DATA_SUCCESS} from "../../actions/actions";
-import {IAuthResponseActivationUserData} from "../../../types/authTypes/authTypes";
+import { Reducer } from "redux";
+import { AuthActionType } from "../../actions/authActionCreators/authActionCreators";
+import { AUTH_LOADING, GET_LOGIN_DATA_FAILURE, GET_LOGIN_DATA_SUCCESS } from "../../actions/actions";
+import { IAuthResponseActivationUserData } from "../../../types/authTypes/authTypes";
 
 interface IInitialAuthState {
     data: IAuthResponseActivationUserData;
@@ -22,9 +22,9 @@ const authReducer: Reducer<IInitialAuthState, AuthActionType> = (state = initial
         case GET_LOGIN_DATA_SUCCESS:
             return { ...state, data: { ...action.payload }, error: null, isAuth: true }
         case GET_LOGIN_DATA_FAILURE:
-            return {...state, error: action.payload}
+            return { ...state, error: action.payload }
         case AUTH_LOADING:{
-            return {...state, isLoading: action.payload}
+            return { ...state, isLoading: action.payload }
         }
         default:
             return state;

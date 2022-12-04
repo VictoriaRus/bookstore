@@ -1,56 +1,69 @@
-import {ActionCreator} from "redux";
-import {GET_ASYNC_BOOKS, GET_ASYNC_BOOKS_FAILURE, GET_ASYNC_BOOKS_START, GET_ASYNC_BOOKS_SUCCESS} from "../actions";
-import {IBook} from "../../../types/booksTypes/booksTypes";
+import {
+    BOOKS_LOADING,
+    GET_BOOKS,
+    GET_BOOKS_FAILURE,
+    GET_BOOKS_SUCCESS, GET_BOOKS_WITH_FILTER, GET_BOOKS_WITH_PAGE,
+    SET_FILTER, SET_PAGE
+} from "../actions";
+import { IAsyncBooksResponseData } from "../../../types/booksTypes/booksTypes";
+import { InferActionTypes } from "../../store/store";
 
-interface IGetAsyncBookStartAction {
-    type: typeof GET_ASYNC_BOOKS_START;
-    payload: {},
-}
+export const booksActionCreators = {
+    // redux-saga
+    getBooks: () => {
+        return {
+            type: GET_BOOKS,
+        }
+    },
+    //reducer
+    setBooksLoading: (isLoading: boolean) => {
+        return {
+            type: BOOKS_LOADING,
+            payload: isLoading,
+        }
+    },
 
-interface IGetAsyncBookAction {
-    type: typeof GET_ASYNC_BOOKS;
-    payload: {},
-}
+    getBooksSuccess: (data: IAsyncBooksResponseData) => {
+        return {
+            type: GET_BOOKS_SUCCESS,
+            payload: data,
+        }
+    },
 
-interface IGetAsyncBookSuccessAction {
-    type: typeof GET_ASYNC_BOOKS_SUCCESS;
-    payload: IBook[],
-}
+      getBooksFailure: (error: string) => {
+        return {
+            type: GET_BOOKS_FAILURE,
+            payload: error,
+        }
+    },
+    //with filter
+    getBooksWithFilter: (filter: string) => {
+        return {
+            type: GET_BOOKS_WITH_FILTER,
+            payload: filter,
+        }
+    },
 
-interface IGetAsyncBookFailureAction {
-    type: typeof GET_ASYNC_BOOKS_FAILURE;
-    payload: string,
-}
+    setBooksFilter: (filter: string) => {
+        return {
+            type: SET_FILTER,
+            payload: filter,
+        }
+    },
+    //with page
+    getBooksWithPage: (page: number) => {
+        return {
+            type: GET_BOOKS_WITH_PAGE,
+            payload: page,
+        }
+    },
 
-export type TBooksActions = IGetAsyncBookAction |
-                            IGetAsyncBookStartAction |
-                            IGetAsyncBookSuccessAction |
-                            IGetAsyncBookFailureAction;
-
-export const getAsyncBooksStart: ActionCreator<TBooksActions> = () => {
-    return {
-        type: GET_ASYNC_BOOKS_START,
-        payload: {},
+    setBooksPage: (page: number) => {
+        return {
+            type: SET_PAGE,
+            payload: page,
+        }
     }
-}
+};
 
-export const getAsyncBooksSuccess: ActionCreator<TBooksActions> = (books: IBook[]) => {
-    return {
-        type: GET_ASYNC_BOOKS_SUCCESS,
-        payload: books,
-    }
-}
-
-export const getAsyncBooksFailure: ActionCreator<TBooksActions> = (error: string) => {
-    return {
-        type: GET_ASYNC_BOOKS_FAILURE,
-        payload: error,
-    }
-}
-
-export const getAsyncBooks: ActionCreator<TBooksActions> = () => {
-    return {
-        type: GET_ASYNC_BOOKS,
-        payload: {}
-    }
-}
+export type BooksActionType = InferActionTypes<typeof booksActionCreators>

@@ -1,32 +1,36 @@
-import React, {useEffect, useState} from 'react';
-import Title from "../common-components/Title";
-import Flex from "../common-components/Flex";
+import React, { useEffect, useState } from "react";
+import Title from "../common-components/Title/Title";
+import Flex from "../common-components/Flex/Flex";
 import styled from "styled-components";
-import Button from "../common-components/Button";
-import Star from "../../assets/icons/Star.png";
-import StarDis from "../../assets/icons/StarDis.png";
-import DescriptionBook from "./DescriptionBook";
-import Like from "./Like";
-import Back from "./Back";
+import Button from "../common-components/Button/Button";
+import Like from "./Like/Like";
+import Back from "./Back/Back";
+import { BASE_CONTENT_API } from "../../api/api";
+import TabGroup from "./TabGroup/TabGroup";
+import { IBookInfo } from "../../types/booksTypes/booksTypes";
+import Stars from "../common-components/Stars/Stars";
+import { useAppSelector } from "../../redux/hooks/hooks";
+import { isAuthSelector } from "../../redux/selectors/authSelector/authSelector";
+
 
 interface IColumnProps {
     width: string;
 }
 
-const ColumnStyled = styled.div<IColumnProps>`
-  width: ${props => props.width}px;
+const Column = styled.div<IColumnProps>`
+  width: ${ props => props.width }px;
   text-align: center;
   @media ( max-width: 768px ) {
     width: 100%;
   }
 `;
 
-const ItemStyled = styled.div`
+const Item = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const WrapBookStyled = styled.div`
+const WrapBook = styled.div`
   padding: 40px 0 59px 0;
   position: relative;
 
@@ -49,19 +53,18 @@ const WrapBookStyled = styled.div`
   }
 `;
 
-const InfoStyled = styled.span`
+const Info = styled.span`
   font-weight: 400;
   font-size: 16px;
   line-height: 200%;
 `;
 
-const BookInfoStyled = styled.span`
+const BookInfo = styled.span`
   font-weight: 400;
   font-size: 16px;
   line-height: 200%;
   color: #A8A8A8;
 `;
-
 
 const ImgBook = styled.img`
   width: 300px;
@@ -92,88 +95,70 @@ const WrapButton = styled.div`
   margin-bottom: 40px;
 `;
 
-interface IBookState {
-    error?: number;
-    title?: string;
-    subtitle?: string;
-    authors?: string;
-    publisher?: string;
-    isbn10?: number;
-    isbn13?: number;
-    pages?: number;
-    year?: number;
-    rating?: number;
-    desc?: string;
-    price?: string;
-    image?: string;
-    url?: string;
-    pdf?: {
-        "Chapter 2"?: string;
-        "Chapter 5"?: string;
-    }
-}
-
 interface IBookProps {
     isbn13: string | undefined;
 }
 
 const Book = ({ isbn13 }: IBookProps) => {
-    const [book, setBook] = useState<IBookState>({});
-    const url = 'https://api.itbook.store/1.0/books/';
+    const isAuth = useAppSelector(isAuthSelector);
+
+    const [book, setBook] = useState<IBookInfo>({} as IBookInfo);
 
     useEffect(() => {
-        fetch(`${ url }${ isbn13 }`)
-            .then(response => response.json())
-            .then(book => {
-                setBook(book);
-            })
-    }, [])
-
-    const stars = [<img src={Star}/>, <img src={Star}/>, <img src={Star}/>, <img src={Star}/>, <img src={StarDis}/>];
+        try {
+            fetch(`${BASE_CONTENT_API}/books/${ isbn13 }`)
+                .then(response => response.json())
+                .then(book => {
+                    setBook(book);
+                })
+        } catch (e) {
+            console.error(e);
+        }
+    }, [isbn13]);
 
     return (
         <>
-            <Back />
+            <Back/>
             <Title>{ book.title }</Title>
             <Flex mobileFlexDirection="column" tabletFlexDirection="column" alignItems="stretch">
-                <ColumnStyled width="544">
+                <Column width="544">
                     <BackgroundBook>
                         <ImgBook src={ book.image }/>
-                        <Like />
+                        { isAuth && <Like book={ book }/> }
                     </BackgroundBook>
-                </ColumnStyled>
-                <ColumnStyled width="448">
-                    <WrapBookStyled>
-                        <ItemStyled>
+                </Column>
+                <Column width="448">
+                    <WrapBook>
+                        <Item>
                             <Title fontSize="40" lineHeight="60" marginBottom="24">{ book.price }</Title>
-                            <span>{ stars }</span>
-                        </ItemStyled>
-                        <ItemStyled>
-                            <BookInfoStyled>Authors</BookInfoStyled>
-                            <InfoStyled>{ book.authors }</InfoStyled>
-                        </ItemStyled>
-                        <ItemStyled>
-                            <BookInfoStyled>Publisher</BookInfoStyled>
-                            <InfoStyled>{ book.publisher }, {book.year}</InfoStyled>
-                        </ItemStyled>
-                        <ItemStyled>
-                            <BookInfoStyled>Language</BookInfoStyled>
-                            <InfoStyled>English</InfoStyled>
-                        </ItemStyled>
-                        <ItemStyled>
-                            <BookInfoStyled>Format</BookInfoStyled>
-                            <InfoStyled>Paper book / ebook (PDF)</InfoStyled>
-                        </ItemStyled>
-                    </WrapBookStyled>
+                            <Stars/>
+                        </Item>
+                        <Item>
+                            <BookInfo>Authors</BookInfo>
+                            <Info>{ book.authors }</Info>
+                        </Item>
+                        <Item>
+                            <BookInfo>Publisher</BookInfo>
+                            <Info>{ book.publisher }, { book.year }</Info>
+                        </Item>
+                        <Item>
+                            <BookInfo>Language</BookInfo>
+                            <Info>English</Info>
+                        </Item>
+                        <Item>
+                            <BookInfo>Format</BookInfo>
+                            <Info>Paper book / ebook (PDF)</Info>
+                        </Item>
+                    </WrapBook>
                     <WrapButton>
                         <Button text="add to cart"/>
                     </WrapButton>
-                    <InfoStyled>Preview book</InfoStyled>
-                </ColumnStyled>
+                    <Info>Preview book</Info>
+                </Column>
             </Flex>
-            <DescriptionBook desc={ book.desc } authors={ book.authors }/>
+            <TabGroup desc={ book.desc } authors={ book.authors }/>
         </>
     );
 };
 
-export default Book;
+export default React.memo(Book);

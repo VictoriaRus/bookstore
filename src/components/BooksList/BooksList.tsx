@@ -1,8 +1,13 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import CardBook from "./CardBook";
+import CardBook from "./CardBook/CardBook";
+import { IBook } from "../../types/booksTypes/booksTypes";
 
-const StyledBooksList = styled.div`
+interface IListStyled {
+    bottomLine?: string;
+}
+
+const List = styled.div<IListStyled>`
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
@@ -18,28 +23,19 @@ const StyledBooksList = styled.div`
     background-color: #E7E7E7;
     display: block;
     position: absolute;
-    bottom: -72px;
+    bottom: ${ props => props.bottomLine || "-72" }px;
     left: 0;
   }
 `;
 
-interface IBooks {
-    title: string;
-    image: string;
-    price: string;
-    subtitle: string;
-    isbn13: number;
-    url?: string;
+interface IBooksProps extends IListStyled {
+    books: IBook[];
 }
 
-interface IBooksProps {
-    books: IBooks[];
-}
-
-const BooksList = ({ books }: IBooksProps) => {
+const BooksList = ({ books, bottomLine }: IBooksProps) => {
 
     return (
-        <StyledBooksList>
+        <List bottomLine={ bottomLine }>
             { books.map(book =>
                 <CardBook key={ book.isbn13 }
                           isbn13={ book.isbn13 }
@@ -49,8 +45,8 @@ const BooksList = ({ books }: IBooksProps) => {
                           subtitle={ book.subtitle }
                 />
             ) }
-        </StyledBooksList>
+        </List>
     )
 }
 
-export default BooksList;
+export default React.memo(BooksList);

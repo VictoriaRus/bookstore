@@ -1,7 +1,8 @@
-import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from "axios";
-import {refreshToken} from "../services/authServices/authServices";
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { refreshToken } from "../services/authServices/authServices";
 
-const BASE_API = 'https://studapi.teachmeskills.by';
+const BASE_API = "https://studapi.teachmeskills.by";
+export const BASE_CONTENT_API = "https://api.itbook.store/1.0";
 
 export const axiosPrivateAuth = axios.create({
     baseURL: BASE_API,
@@ -10,7 +11,7 @@ export const axiosPrivateAuth = axios.create({
 
 axiosPrivateAuth.interceptors.request.use(
     (config: AxiosRequestConfig) => {
-        const token = localStorage.getItem('accessToken');
+        const token = localStorage.getItem("accessToken");
 
         if (token) {
             config.headers!.authorization = `Bearer ${token}`;
@@ -27,14 +28,14 @@ axiosPrivateAuth.interceptors.response.use(
         const originalRequest = error.config;
         if (error.response) {
             if (error.response.status === 401 && !originalRequest.isRetry) {
-                const token = localStorage.getItem('refreshToken');
+                const token = localStorage.getItem("refreshToken");
                 originalRequest.isRetry = true;
 
                 if (token) {
                     try {
-                        const newAccessToken = await refreshToken({refresh: token});
-                        originalRequest.headers!.authorization = `Bearer ${newAccessToken.data.access}`;
-                        localStorage.setItem('accessToken', newAccessToken.data.access);
+                        const newAccessToken = await refreshToken({ refresh: token });
+                        originalRequest.headers!.authorization = `Bearer ${ newAccessToken.data.access }`;
+                        localStorage.setItem("accessToken", newAccessToken.data.access);
 
                         return axiosPrivateAuth(originalRequest);
                     } catch (e) {
@@ -45,13 +46,14 @@ axiosPrivateAuth.interceptors.response.use(
                 return Promise.reject(error);
             }
         } else {
-            if (window.location.pathname !== '/sign-in')
-                window.location.href = '/sign-in';
+            if (window.location.pathname !== "/sign-in"){
+                window.location.href = "/sign-in";
+            }
         }
     }
 )
 
-/*
-export const axiosPrivateContent= axios.create({
-    baseURL: BASE_API,
-});*/
+
+export const axiosContent = axios.create({
+    baseURL: BASE_CONTENT_API,
+});
