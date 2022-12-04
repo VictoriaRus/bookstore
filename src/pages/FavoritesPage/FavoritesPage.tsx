@@ -2,9 +2,9 @@ import React from "react";
 import Section from "../../components/common-components/Section/Section";
 import Container from "../../components/common-components/Container/Container";
 import Title from "../../components/common-components/Title/Title";
-import Back from "../../components/Book/Back/Back";
-import FavoriteList from "../../components/FavoriteList/FavoriteList";
-import SimilarBooks from "../../components/Book/SimilarBooks/SimilarBooks";
+import Back from "../../components/common-components/Back/Back";
+import FavoriteList from "../../components/favorite-page-components/FavoriteList/FavoriteList";
+import SimilarBooks from "../../components/common-components/SimilarBooks/SimilarBooks";
 
 const FavoritesPage = () => {
     return (

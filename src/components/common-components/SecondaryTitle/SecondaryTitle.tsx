@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { MOBILE_WIDTH } from "../../../mock-data/constants";
 
 const SecondaryTitle = styled.h5`
   font-style: normal;
@@ -8,7 +9,7 @@ const SecondaryTitle = styled.h5`
   line-height: 24px;
   color: #A8A8A8;
   margin-bottom: 32px;
-  @media ( max-width: 415px ) {
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
     margin-bottom: 24px;
   }
 `;

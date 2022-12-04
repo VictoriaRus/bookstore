@@ -1,14 +1,9 @@
-import React, {useMemo} from "react";
+import React from "react";
 import styled from "styled-components";
+import {COLORS, getColor, MOBILE_WIDTH, TABLET_WIDTH } from "../../../mock-data/constants";
 
 interface ICardBookStyle {
     color: string;
-}
-
-const COLORS = ['#D7E4FD', '#CAEFF0', '#F4EEFD', '#FEE9E2'];
-
-const getColor = () => {
-    return Math.floor(Math.random() * COLORS.length);
 }
 
 const BackgroundBook = styled.div<ICardBookStyle>`
@@ -16,16 +11,15 @@ const BackgroundBook = styled.div<ICardBookStyle>`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: ${props => props.color || '#D7E4FD'};
-  //margin-bottom: 20px;
+  background-color: ${ props => props.color || "#D7E4FD" };
 `;
 
 const ImgBook = styled.img`
   width: 226px;
-  @media ( max-width: 768px ) {
+  @media ( max-width: ${ TABLET_WIDTH } ) {
     width: 210px;
   }
-  @media ( max-width: 415px ) {
+  @media ( max-width: ${ MOBILE_WIDTH }) {
     width: 174px;
   }
 `;

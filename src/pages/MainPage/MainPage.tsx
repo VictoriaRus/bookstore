@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import Section from "../../components/common-components/Section/Section";
 import Container from "../../components/common-components/Container/Container";
 import Title from "../../components/common-components/Title/Title";
-import Subscribe from "../../components/Subscribe/Subscribe";
-import BooksList from "../../components/BooksList/BooksList";
+import Subscribe from "../../components/common-components/Subscribe/Subscribe";
+import BooksList from "../../components/common-components/BooksList/BooksList";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks/hooks";
 import {
     booksSelector,
@@ -11,7 +11,7 @@ import {
     pageCountBooksSelector, totalBooksSelector
 } from "../../redux/selectors/booksSelector/booksSelector";
 import {booksActionCreators} from "../../redux/actions/booksActionsCreators/booksActionsCreators";
-import Pagination from "../../components/common-components/Pagination/Pagination";
+import Pagination from "../../components/main-page-components/Pagination/Pagination";
 import SecondaryTitle from "../../components/common-components/SecondaryTitle/SecondaryTitle";
 
 const MainPage = () => {

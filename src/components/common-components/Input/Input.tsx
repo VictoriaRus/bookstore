@@ -1,5 +1,6 @@
 import React, { HTMLAttributes } from 'react';
 import styled from "styled-components";
+import { TABLET_WIDTH } from "../../../mock-data/constants";
 
 interface IStyleInputProps {
     width?: string;
@@ -35,7 +36,7 @@ const StyleInput = styled.input<IStyleInputProps>`
     color: #A8A8A8;
   }
 
-  @media ( max-width: 768px ) {
+  @media ( max-width: ${ TABLET_WIDTH } ) {
     width: 100%;
   }
 `;

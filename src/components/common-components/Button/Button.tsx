@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { MOBILE_WIDTH, TABLET_WIDTH } from "../../../mock-data/constants";
 
 interface IStyledButtonProps {
     width?: string;
@@ -15,7 +16,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
   height: 56px;
   border: none;
   background-color: #313037;
-  font-family: "Bebas Neue";
+  font-family: "Bebas Neue", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -38,10 +39,10 @@ const StyledButton = styled.button<IStyledButtonProps>`
     background-color: #A8A8A8;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${ TABLET_WIDTH }) {
     width: ${ props => props.mobileWidth || "448" }px;
   }
-  @media (max-width: 415px) {
+  @media (max-width: ${ MOBILE_WIDTH }) {
     width: 100%;
   }
 `;

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Section from "../../components/common-components/Section/Section";
 import Container from "../../components/common-components/Container/Container";
 import Input from "../../components/common-components/Input/Input";
 import Button from "../../components/common-components/Button/Button";
@@ -11,11 +10,23 @@ import {
     HeadForm,
     Item,
     MyLink,
-    REGULAR,
     WrapForm,
     Wrapper
 } from "../SignInPage/SignInPage";
 import { Label } from "../../components/common-components/Lable/Lable";
+import {MOBILE_WIDTH, REGULAR, TABLET_WIDTH} from "../../mock-data/constants";
+import styled from "styled-components";
+
+const Section = styled.div`
+  padding: 72px 0;
+  min-height: calc(100vh - 204px);
+  @media ( max-width: ${ TABLET_WIDTH } ) {
+    padding: 48px 0;
+  }
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
+    padding: 36px 0;
+  }
+`;
 
 const initialRegistrationForm = { username: "", email: "", password: "", confirmPassword: "" };
 

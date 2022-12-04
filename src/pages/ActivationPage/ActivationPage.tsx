@@ -7,13 +7,14 @@ import Section from "../../components/common-components/Section/Section";
 import Container from "../../components/common-components/Container/Container";
 import styled from "styled-components";
 import Title from "../../components/common-components/Title/Title";
+import { MOBILE_WIDTH } from "../../mock-data/constants";
 
 const Wrap = styled.div`
   margin: 0 auto;
   max-width: 544px;
   border: 1px solid #E7E7E7;
   padding: 32px;
-  @media ( max-width: 415px ) {
+  @media ( max-width: ${ MOBILE_WIDTH }) {
     width: 100%;
     border: none;
     padding: 0;

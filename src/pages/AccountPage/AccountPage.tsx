@@ -10,6 +10,7 @@ import { Label } from "../../components/common-components/Lable/Lable";
 import styled from "styled-components";
 import Container from "../../components/common-components/Container/Container";
 import { useNavigate } from "react-router";
+import { MOBILE_WIDTH, TABLET_WIDTH } from "../../mock-data/constants";
 
 const Account = styled.div`
   padding-bottom: 72px;
@@ -26,7 +27,7 @@ const Account = styled.div`
     left: 0;
   }
 
-  @media ( max-width: 415px ) {
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
     padding-bottom: 56px;
   }
 `;
@@ -40,7 +41,7 @@ const Row = styled.div`
     margin-bottom: 0;
   }
 
-  @media ( max-width: 768px ) {
+  @media ( max-width: ${ TABLET_WIDTH } ) {
     display: block;
   }
 `;
@@ -55,10 +56,10 @@ const ButtonBox = styled.div`
   width: 544px;
   margin-top: 48px;
   margin-left: auto;
-  @media ( max-width: 768px ) {
+  @media ( max-width: ${ TABLET_WIDTH } ) {
     width: 100%;
   }
-  @media ( max-width: 415px ) {
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
     display: block;
   }
 `;
@@ -80,7 +81,7 @@ const ButtonWhite = styled(Button)`
     background-color: #A8A8A8;
   }
 
-  @media ( max-width: 415px ) {
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
     margin-top: 24px;
   }
 `;

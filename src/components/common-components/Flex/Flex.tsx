@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { MOBILE_WIDTH, TABLET_WIDTH } from "../../../mock-data/constants";
 
 interface IFlexProps {
     display?: string;
@@ -16,11 +17,11 @@ const Flex = styled.div<IFlexProps>`
   align-items: ${ props => props.alignItems || "center" };
   justify-content: ${ props => props.justifyContent || "space-between" };
   
-  @media ( max-width: 768px ) {
+  @media ( max-width: ${ TABLET_WIDTH } ) {
     flex-direction: ${ props => props.tabletFlexDirection || "row" };
   }
   
-  @media ( max-width: 415px ) {
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
     flex-direction: ${ props => props.mobileFlexDirection || "row" };
   }
 `;

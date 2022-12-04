@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes, Navigate } from 'react-router-dom';
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/common-components/Layout/Layout";
 import MainPage from "./pages/MainPage/MainPage";
 import BookPage from "./pages/BookPage/BookPage";
 import CartPage from "./pages/CartPage/CartPage";
@@ -10,7 +10,7 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import ActivationPage from "./pages/ActivationPage/ActivationPage";
-import PersistLogin from "./components/PersistLogin/PersistLogin";
+import PersistLogin from "./components/common-components/PersistLogin/PersistLogin";
 
 const App = () => {
   return (

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import SecondaryTitle from "../../components/common-components/SecondaryTitle/SecondaryTitle";
-import Section from "../../components/common-components/Section/Section";
 import Container from "../../components/common-components/Container/Container";
 import Input from "../../components/common-components/Input/Input";
 import Button from "../../components/common-components/Button/Button";
@@ -15,20 +14,33 @@ import {
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { Label } from "../../components/common-components/Lable/Lable";
+import {MOBILE_WIDTH, REGULAR, TABLET_WIDTH} from "../../mock-data/constants";
 
 export const Wrapper = styled.div`
   margin: 0 auto;
   max-width: 544px;
   border: 1px solid #E7E7E7;
-  @media ( max-width: 415px ) {
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
     width: 100%;
     border: none;
   }
 `;
 
+const Section = styled.div`
+  padding: 72px 0;
+  min-height: calc(100vh - 204px);
+  @media ( max-width: ${ TABLET_WIDTH } ) {
+    padding: 48px 0;
+  }
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
+    padding: 36px 0;
+    min-height: auto;
+  }
+`;
+
 export const Form = styled.div`
   padding: 26px 32px 40px;
-  @media ( max-width: 415px ) {
+  @media ( max-width:  ${ MOBILE_WIDTH } ) {
     padding: 26px 0 20px;
   }
 `;
@@ -46,13 +58,13 @@ export const WrapForm = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-  @media ( max-width: 415px ) {
+  @media ( max-width:  ${ MOBILE_WIDTH } ) {
     padding: 0;
   }
 `;
 
 export const FormLink = styled.div`
-  font-family: "Bebas Neue";
+  font-family: "Bebas Neue", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -80,7 +92,7 @@ export const FormLinkActive = styled(FormLink)`
 `;
 
 export const MyLink = styled(Link)`
-  font-family: "Bebas Neue";
+  font-family: "Bebas Neue", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 24px;
@@ -101,7 +113,6 @@ export const Error = styled.div`
   color: #313037;
 `;
 
-export const REGULAR = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const initialLoginForm = {email: "", password: ""};
 
 const SignInPage = () => {
