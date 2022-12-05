@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { MOBILE_WIDTH } from "../../../mock-data/constants";
+import { MOBILE_WIDTH, TYPES } from "../../../mock-data/constants";
 
 interface ITab{
     active:boolean;
@@ -16,7 +16,7 @@ const Tab = styled.button<ITab>`
   position: relative;
   cursor: pointer;
 
-  ${({active}) =>
+  ${ ({ active }) =>
           active && 
     `color: #313037;
     &::after {
@@ -41,7 +41,7 @@ const ButtonGroup = styled.div`
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     height: 1px;
     width: 100%;
     background-color: #E7E7E7;
@@ -69,28 +69,26 @@ interface IBookProps {
     authors: string;
 }
 
-const types: string[] = ['Description', 'Authors'];
-
-function TabGroup({desc, authors}: IBookProps) {
-    const [active, setActive] = useState(types[0]);
-    const [text, setText] = useState({desc, authors});
+function TabGroup({ desc, authors }: IBookProps) {
+    const [active, setActive] = useState(TYPES[0]);
+    const [text, setText] = useState({ desc, authors });
 
     useEffect(()=>{
-        setText((prevState => ({...prevState, desc: desc, authors: authors})))
+        setText((prevState => ({ ...prevState, desc: desc, authors: authors })))
     },[desc, authors]);
 
     return (
         <>
             <ButtonGroup>
-                {types.map(type => (
-                    <Tab key={type} active={active === type} onClick={() => setActive(type)}>
-                        {type}
+                { TYPES.map(type => (
+                    <Tab key={ type } active={ active === type } onClick={ () => setActive(type) }>
+                        { type }
                     </Tab>
                 ))}
             </ButtonGroup>
-            {active === types[0] ? <Text>{text.desc}</Text> : <Text>{text.authors}</Text>}
+            { active === TYPES[0] ? <Text>{ text.desc }</Text> : <Text>{ text.authors }</Text> }
         </>
     );
 }
 
-export default TabGroup;
+export default React.memo(TabGroup);

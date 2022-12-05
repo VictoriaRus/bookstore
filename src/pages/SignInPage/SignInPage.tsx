@@ -14,7 +14,7 @@ import {
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { Label } from "../../components/common-components/Lable/Lable";
-import {MOBILE_WIDTH, REGULAR, TABLET_WIDTH} from "../../mock-data/constants";
+import { MOBILE_WIDTH, REGULAR, TABLET_WIDTH } from "../../mock-data/constants";
 
 export const Wrapper = styled.div`
   margin: 0 auto;
@@ -113,7 +113,7 @@ export const Error = styled.div`
   color: #313037;
 `;
 
-const initialLoginForm = {email: "", password: ""};
+const initialLoginForm = { email: "", password: "" };
 
 const SignInPage = () => {
     const [loginForm, setLoginForm] = useState(initialLoginForm);
@@ -139,11 +139,11 @@ const SignInPage = () => {
     }, [emailError, passwordError]);
 
     useEffect(() => {
-        isAuth && navigate("/account", {replace: true});
+        isAuth && navigate("/account", { replace: true });
     }, [isAuth, navigate]);
 
     const onLoginFormChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-        setLoginForm(prevState => ({...prevState, [e.target.name]: e.target.value}));
+        setLoginForm(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
 
         if (e.target.name === "email") {
             if (!REGULAR.test(String(e.target.value).toLowerCase())) {
@@ -198,22 +198,22 @@ const SignInPage = () => {
                             { errorMessage && <Error>{ errorMessage }</Error> }
                             <Item>
                                 { (emailDirty && emailError) && <Error>{ emailError }</Error> }
-                                <Label htmlFor='email'>Email</Label>
-                                <Input width='480' value={ loginForm.email }
-                                       placeholder='Your email' onBlur={ e => blurHandler(e) }
+                                <Label htmlFor="email">Email</Label>
+                                <Input width="480" value={ loginForm.email }
+                                       placeholder="Your email" onBlur={ e => blurHandler(e) }
                                        onChange={ onLoginFormChange }
-                                       fieldName='email' id='email'/>
+                                       fieldName="email" id="email"/>
                             </Item>
                             <Item>
                                 { (passwordDirty && passwordError) && <Error>{ passwordError }</Error> }
-                                <Label htmlFor='password'>Password</Label>
-                                <Input width='480' value={ loginForm.password } placeholder='Your password'
+                                <Label htmlFor="password">Password</Label>
+                                <Input width="480" value={ loginForm.password } placeholder="Your password"
                                        onBlur={ e => blurHandler(e) }
-                                       onChange={ onLoginFormChange } fieldName='password' id='password'/>
+                                       onChange={ onLoginFormChange } fieldName="password" id="password"/>
                             </Item>
                             <SecondaryTitle>Forgot password ?</SecondaryTitle>
-                            <Button width='480' disabled={ !formValid } type="button" text="Sign In"
-                                    onClick={ onLoginFormSubmit } mobileWidth='478'/>
+                            <Button width="480" disabled={ !formValid } type="button" text="Sign In"
+                                    onClick={ onLoginFormSubmit } mobileWidth="478"/>
                         </Form>
                     </Wrapper>) : <div>Loading...</div>}
             </Container>

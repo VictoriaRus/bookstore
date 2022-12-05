@@ -14,7 +14,7 @@ import {
     Wrapper
 } from "../SignInPage/SignInPage";
 import { Label } from "../../components/common-components/Lable/Lable";
-import {MOBILE_WIDTH, REGULAR, TABLET_WIDTH} from "../../mock-data/constants";
+import { MOBILE_WIDTH, REGULAR, TABLET_WIDTH } from "../../mock-data/constants";
 import styled from "styled-components";
 
 const Section = styled.div`
@@ -143,11 +143,11 @@ const SignUpPage = () => {
                     {
                         isRegistered ? <div>Please check email to verify your account!</div> : (
                             <>
-                                {!isLoading ?
+                                { !isLoading ?
                                     (<Wrapper>
                                         <HeadForm>
                                             <WrapForm>
-                                                <MyLink to='/sign-in'>SIGN IN</MyLink>
+                                                <MyLink to="/sign-in">SIGN IN</MyLink>
                                                 <FormLinkActive>SIGN UP</FormLinkActive>
                                             </WrapForm>
                                         </HeadForm>
@@ -155,31 +155,33 @@ const SignUpPage = () => {
                                             { errorMessage && <Error>{ errorMessage }</Error> }
                                             <Item>
                                                 { (nameDirty && nameError) && <Error>{ nameError }</Error> }
-                                                <Label htmlFor='name'>Name</Label>
-                                                <Input width='480' value={registrationForm.username} placeholder='Your name'
+                                                <Label htmlFor="name">Name</Label>
+                                                <Input width="480" value={ registrationForm.username } placeholder="Your name"
                                                        onChange={ onRegistrationFormChange } onBlur={ e => blurHandler(e) }
-                                                       fieldName='username' id='name'/>
+                                                       fieldName="username" id="name"/>
                                             </Item>
                                             <Item>
                                                 { (emailDirty && emailError) && <Error>{ emailError }</Error> }
-                                                <Label htmlFor='email'>Email</Label>
-                                                <Input width='480' value={ registrationForm.email } placeholder='Your email'
+                                                <Label htmlFor="email">Email</Label>
+                                                <Input width="480" value={ registrationForm.email } placeholder="Your email"
                                                        onChange={ onRegistrationFormChange } onBlur={ e => blurHandler(e) }
-                                                       fieldName='email' id='email'/>
+                                                       fieldName="email" id="email"/>
                                             </Item>
                                             <Item>
                                                 { (passwordDirty && passwordError) && <Error>{ passwordError }</Error> }
-                                                <Label htmlFor='password'>Password</Label>
-                                                <Input width='480' value={ registrationForm.password } placeholder='Your password'
-                                                       onChange={ onRegistrationFormChange } onBlur={ e => blurHandler(e) } fieldName='password' id='password'/>
+                                                <Label htmlFor="password">Password</Label>
+                                                <Input width="480" value={ registrationForm.password } placeholder="Your password"
+                                                       onChange={ onRegistrationFormChange } onBlur={ e => blurHandler(e) }
+                                                       fieldName="password" id="password"/>
                                             </Item>
                                             <Item>
                                                 { (confirmPasswordDirty && confirmError) && <Error>{ confirmError }</Error> }
-                                                <Label htmlFor='confirm'>Confirm password</Label>
+                                                <Label htmlFor="confirm">Confirm password</Label>
                                                 <Input value={ registrationForm.confirmPassword } onChange={ onRegistrationFormChange }
-                                                       width='480' fieldName='confirmPassword' onBlur={ e => blurHandler(e) } placeholder='Confirm your password' id='confirm'/>
+                                                       width="480" fieldName="confirmPassword" onBlur={ e => blurHandler(e) }
+                                                       placeholder="Confirm your password" id="confirm"/>
                                             </Item>
-                                            <Button width='480' disabled={ !formValid } type='button' text='Sign Up'
+                                            <Button width="480" disabled={ !formValid } type="button" text="Sign Up"
                                                     onClick={ onRegistrationFormSubmit }/>
                                         </Form>
                                     </Wrapper>) : <div>Loading...</div>}

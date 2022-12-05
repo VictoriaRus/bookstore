@@ -135,7 +135,7 @@ const AccountPage = () => {
                         <div>
                             <ItemRow>
                                 <Label htmlFor="password">Password</Label>
-                                <Input value={accountForm.password} onChange={onAccountFormChange} fieldName="password"
+                                <Input value={ accountForm.password } onChange={ onAccountFormChange } fieldName="password"
                                        id="password"/>
                             </ItemRow>
                             <ItemRow>

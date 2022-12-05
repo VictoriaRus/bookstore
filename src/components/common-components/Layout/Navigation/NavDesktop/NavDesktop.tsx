@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Search from "../../../Search/Search";
 import Flex from "../../../Flex/Flex";
 import { Link } from "react-router-dom";
@@ -43,4 +43,4 @@ const NavDesktop = () => {
     );
 };
 
-export default NavDesktop;
+export default React.memo(NavDesktop);

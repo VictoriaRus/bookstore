@@ -8,5 +8,9 @@ export const COLORS = ['#D7E4FD', '#CAEFF0', '#F4EEFD', '#FEE9E2'];
 export const getColor = () => {
     return Math.floor(Math.random() * COLORS.length);
 }
+//TabGroup
+export const TYPES: string[] = ['Description', 'Authors'];
+//Stars
+export const STARS = [1, 2, 3, 4, 5];
 //regular
 export const REGULAR = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

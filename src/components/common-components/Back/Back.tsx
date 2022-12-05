@@ -10,12 +10,12 @@ const Arrow = styled.img`
 
 const Back = () => {
     const navigate = useNavigate();
-    const Redirect = () => {
+    const redirect = () => {
         navigate(`/main`);
     }
 
     return (
-        <Arrow src={ IconArrowLeft } onClick={ Redirect }/>
+        <Arrow src={ IconArrowLeft } onClick={ redirect }/>
     );
 };
 

@@ -22,7 +22,7 @@ const Wrap = styled.div`
 `;
 
 const ActivationPage = () => {
-    const {uid, token} = useParams();
+    const { uid, token } = useParams();
     const [isActivated, setIsActivated] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +32,7 @@ const ActivationPage = () => {
             const activateAccount = async () => {
                 try {
                     setIsLoading(true);
-                    const response = await accountActivation({uid, token});
+                    const response = await accountActivation({ uid, token });
 
                     if (response) {
                         setIsActivated(true);
