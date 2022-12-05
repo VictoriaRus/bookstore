@@ -8,6 +8,8 @@ import NavTablet from "../Navigation/NavTablet/NavTablet";
 import MenuBurgerTablet from "../Burger/MenuBurgerTablet/MenuBurgerTablet";
 import MenuBurgerMobile from "../Burger/MenuBurgerMobile/MenuBurgerMobile";
 import { useLocation } from "react-router";
+import { useAppSelector } from "../../../../redux/hooks/hooks";
+import { filterBooksSelector } from "../../../../redux/selectors/booksSelector/booksSelector";
 
 const StyledHeader = styled.div`
   position: relative;
@@ -34,9 +36,11 @@ const Header = () => {
     const location = useLocation();
     const [isOpenMenu, setIsOpenMenu] = useState(true);
 
+    const filter = useAppSelector(filterBooksSelector);
+
     useEffect(() => {
         setIsOpenMenu(false);
-    }, [location]);
+    }, [location, filter]);
 
     const handledBurger = () => {
         setIsOpenMenu(prevState => !prevState);
