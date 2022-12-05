@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import Zoom from "../../../assets/icons/Icon-Search.svg";
 import Input from "../Input/Input";
 import { booksActionCreators } from "../../../redux/actions/booksActionsCreators/booksActionsCreators";
-import { useAppDispatch } from "../../../redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks/hooks";
+import { filterBooksSelector } from "../../../redux/selectors/booksSelector/booksSelector";
 
 interface ISearchProps {
     width?: string;
@@ -39,11 +40,17 @@ const Icon = styled.span`
 
 const Search = ({ width, placeholder }: ISearchProps) => {
     const dispatch = useAppDispatch();
+    const filter = useAppSelector(filterBooksSelector);
+
     const [searchForm, setSearchForm] = useState({ searchText: "" });
 
     const onSearchTextChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchForm(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
     }, []);
+
+    useEffect(() => {
+        setSearchForm(prevState => ({ ...prevState, searchText: filter }));
+    }, [filter]);
 
     return (
         <Wrap>

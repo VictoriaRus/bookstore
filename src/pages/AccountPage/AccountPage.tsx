@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Section from "../../components/common-components/Section/Section";
 import Title from "../../components/common-components/Title/Title";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
@@ -99,7 +99,11 @@ const AccountPage = () => {
         newPassword: "",
     });
 
-    const Redirect = useCallback(() => {
+    useEffect(() => {
+        setAccountForm(prevState => ({ ...prevState, name: username, email: email }));
+    }, [username, email]);
+
+    const redirect = useCallback(() => {
         navigate(`/main`);
     }, [navigate]);
 
@@ -153,7 +157,7 @@ const AccountPage = () => {
                 </Account>
                 <ButtonBox>
                     <Button width="256" text="Logout" onClick={ onLogout }/>
-                    <ButtonWhite width="256" text="Cancel" onClick={ Redirect }/>
+                    <ButtonWhite width="256" text="Cancel" onClick={ redirect }/>
                 </ButtonBox>
             </Container>
         </Section>

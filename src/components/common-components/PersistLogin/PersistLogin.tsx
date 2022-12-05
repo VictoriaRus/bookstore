@@ -17,14 +17,14 @@ const PersistLogin = () => {
             const getAuthUserData = async () => {
                 try {
                     const userData: AxiosResponse<IAuthResponseActivationUserData> = await getAuthorizedUserInfo();
-                    dispatch(authActionCreators.getLoginDataSuccess({...userData.data}))
+                    dispatch(authActionCreators.getLoginDataSuccess({ ...userData.data }))
                 } catch (e) {
                     console.error(e);
                 }
             };
             getAuthUserData();
         }
-    }, [dispatch, token])
+    }, [dispatch, token]);
 
     return isAuth || token ? <Outlet /> : <Navigate to = "/sign-in" replace />
 };

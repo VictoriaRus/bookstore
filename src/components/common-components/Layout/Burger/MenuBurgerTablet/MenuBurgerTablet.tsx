@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import Button from "../../../Button/Button";
 import { Link } from "react-router-dom";
 import Title from "../../../Title/Title";
 import Search from "../../../Search/Search";
-import { useAppSelector } from "../../../../../redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks/hooks";
 import { isAuthSelector } from "../../../../../redux/selectors/authSelector/authSelector";
+import { authActionCreators } from "../../../../../redux/actions/authActionCreators/authActionCreators";
 
 const BackStyled = styled.div`
   position: absolute;
@@ -55,6 +56,19 @@ const Links = styled.div`
 
 const MenuBurgerTablet = () => {
     const isAuth = useAppSelector(isAuthSelector);
+    const dispatch = useAppDispatch();
+
+    const onLogout = useCallback(() => {
+        dispatch(authActionCreators.logout());
+    }, [dispatch]);
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
+    }, []);
 
     return (
         <BackStyled>
@@ -73,7 +87,11 @@ const MenuBurgerTablet = () => {
                         </Links>
                     }
                 </div>
-                { isAuth ? <Button mobileWidth="288" text="log out" /> : <Button mobileWidth="288" text="sign in" /> }
+                { isAuth ? <Button mobileWidth="288" onClick={ onLogout } text="log out" /> :
+                    <Link to="/sign-in">
+                        <Button mobileWidth="288" text="sign in" />
+                    </Link>
+                }
             </MenuStyled>
         </BackStyled>
     );

@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks/hooks";
 import { booksActionCreators } from "../../../redux/actions/booksActionsCreators/booksActionsCreators";
 import { pageBooksSelector, pageCountBooksSelector } from "../../../redux/selectors/booksSelector/booksSelector";
 import styled from "styled-components";
 import PrevImg from "../../../assets/icons/Prev.svg";
 import NextImg from "../../../assets/icons/Next.svg";
-import { MOBILE_WIDTH } from "../../../mock-data/constants";
+import { makeArr, MOBILE_WIDTH } from "../../../mock-data/constants";
 
 interface IButtonProps {
     isActive: boolean;
@@ -68,6 +68,8 @@ const PaginationBtn = styled.button<IButtonProps>`
 `;
 
 const Pagination = () => {
+    const [pages, setPages] = useState([] as number[]);
+
     const dispatch = useAppDispatch();
 
     const page = useAppSelector(pageBooksSelector);
@@ -77,10 +79,9 @@ const Pagination = () => {
         dispatch(booksActionCreators.getBooksWithPage(page));
     };
 
-    let pages: number[] = [];
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i);
-    }
+    useEffect(() => {
+        setPages(makeArr(pageCount));
+    }, [pageCount]);
 
     return (
         <PaginationStyle>

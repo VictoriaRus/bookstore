@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
 import Search from "../../../Search/Search";
 import { Link } from "react-router-dom";
 import Title from "../../../Title/Title";
@@ -7,6 +7,9 @@ import styled from "styled-components";
 import Logo from "../../../Logo/Logo";
 import Bag from "../../../../../assets/icons/Bag.svg";
 import { StyledIcon } from "../../Navigation/NavDesktop/NavDesktop";
+import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks/hooks";
+import { authActionCreators } from "../../../../../redux/actions/authActionCreators/authActionCreators";
+import { isAuthSelector } from "../../../../../redux/selectors/authSelector/authSelector";
 
 const Menu = styled.div`
   position: absolute;
@@ -49,6 +52,21 @@ const Links = styled.div`
 `;
 
 const MenuBurgerMobile = () => {
+    const dispatch = useAppDispatch();
+    const isAuth = useAppSelector(isAuthSelector);
+
+    const onLogout = useCallback(() => {
+        dispatch(authActionCreators.logout());
+    }, [dispatch]);
+
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
+    }, []);
+
     return (
         <Menu>
             <div>
@@ -63,16 +81,22 @@ const MenuBurgerMobile = () => {
                     </div>
                 </CloseWrap>
                 <Search width="287" placeholder="Search"/>
-                <Links>
-                    <Link to="/cart">
-                        <Title mobileFontSize="32" mobileMarginBottom="48">Favorites</Title>
-                    </Link>
-                    <Link to="/favorites">
-                        <Title mobileFontSize="32">Cart</Title>
-                    </Link>
-                </Links>
+                { isAuth &&
+                    <Links>
+                        <Link to="/favorites">
+                            <Title mobileFontSize="32" mobileMarginBottom="48">Favorites</Title>
+                        </Link>
+                        <Link to="/cart">
+                            <Title mobileFontSize="32">Cart</Title>
+                        </Link>
+                    </Links>
+                }
             </div>
-            <Button mobileWidth="288" text="log out"/>
+            { isAuth ? <Button mobileWidth="288" onClick={ onLogout } text="log out" /> :
+                <Link to="/sign-in">
+                    <Button mobileWidth="288" text="sign in" />
+                </Link>
+            }
         </Menu>
     );
 };

@@ -14,3 +14,11 @@ export const TYPES: string[] = ['Description', 'Authors'];
 export const STARS = [1, 2, 3, 4, 5];
 //regular
 export const REGULAR = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//Pagination
+export const makeArr = (count: number) => {
+    let pages: number[] = [];
+    for (let i = 1; i <= count; i++) {
+        pages.push(i);
+    }
+    return pages;
+}
