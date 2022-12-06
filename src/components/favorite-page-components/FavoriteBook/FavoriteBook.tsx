@@ -7,6 +7,8 @@ import Like from "../../../assets/icons/Favorite.png";
 import Stars from "../../common-components/Stars/Stars";
 import { favoritesActionCreators } from "../../../redux/actions/favoritesActionsCreators/favoritesActionsCreators";
 import { useAppDispatch } from "../../../redux/hooks/hooks";
+import { MOBILE_WIDTH, TABLET_WIDTH } from "../../../mock-data/constants";
+import IconBG from "./IconBG/IconBG";
 
 const Favorite = styled.div`
   display: flex;
@@ -24,13 +26,22 @@ const Favorite = styled.div`
     left: 0;
   }
 
-  @media ( max-width: 768px ) {
+  @media ( max-width: ${ TABLET_WIDTH } ) {
     padding: 32px 0;
+  }
+  
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
+    flex-direction: column;
   }
 `;
 
 const BlockImg = styled.div`
   width: 256px;
+  
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 `;
 
 const Info = styled.div`
@@ -39,6 +50,26 @@ const Info = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-grow: 1;
+  
+  @media ( max-width: ${ TABLET_WIDTH } ) {
+    align-items: normal;
+    padding-left: 32px;
+    margin: auto;
+  }
+
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
+`;
+
+const Wrap = styled.div`
+  @media ( max-width: ${ TABLET_WIDTH } ) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 const Price = styled.div`
@@ -46,8 +77,16 @@ const Price = styled.div`
   justify-content: space-between;
 `;
 
-const DisLike = styled.img`
+const DisLike = styled.div`
   cursor: pointer;
+  font-size: 0;
+  @media ( max-width: ${ MOBILE_WIDTH } ) {
+    background-color: #313037;
+    display: block;
+    position: absolute;
+    top: 32px;
+    right: 0;
+  }
 `;
 
 interface IBookInfoProps {
@@ -73,16 +112,19 @@ const FavoriteBook = ({ isbn13, title, image, price, authors, publisher, year }:
                 <Photo image={ image }/>
             </BlockImg>
             <Info>
-                <div>
-                    <Title fontSize='24' lineHeight='32' marginBottom='8' mobileMarginBottom='8'>{ title }</Title>
+                <Wrap>
+                    <Title fontSize="24" lineHeight="32" marginBottom="8" mobileFontSize="24"
+                           mobileLineHeight="24" mobileMarginBottom="10">{ title }</Title>
                     <SecondaryTitle>by { authors }, { publisher } { year }</SecondaryTitle>
                     <Price>
-                        <Title mobileFontSize='24' fontSize='24' lineHeight='32' mobileLineHeight='32'
-                               marginBottom='0'>{ price }</Title>
+                        <Title mobileFontSize="24" fontSize="24" lineHeight="32" mobileLineHeight="32"
+                               marginBottom="0" mobileMarginBottom="0">{ price }</Title>
                         <Stars/>
                     </Price>
-                </div>
-                <DisLike src={ Like } alt="Like" onClick={ deleteFavoriteBook }/>
+                </Wrap>
+                <DisLike onClick={ deleteFavoriteBook }>
+                    <IconBG fill="none"/>
+                </DisLike>
             </Info>
         </Favorite>
     );

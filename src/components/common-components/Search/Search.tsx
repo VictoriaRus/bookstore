@@ -58,7 +58,7 @@ const Search = ({ width, placeholder }: ISearchProps) => {
                 e.preventDefault();
                 dispatch(booksActionCreators.getBooksWithFilter(searchForm.searchText));
             }}>
-                <Input value={ searchForm.searchText } fieldName='searchText' onChange={ onSearchTextChange }
+                <Input value={ searchForm.searchText } fieldName="searchText" onChange={ onSearchTextChange }
                        width={ width } placeholder={ placeholder }/>
             </form>
             <Icon/>

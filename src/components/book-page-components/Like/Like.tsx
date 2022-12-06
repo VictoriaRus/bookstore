@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useAppDispatch } from "../../../redux/hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
 import { favoritesActionCreators } from "../../../redux/actions/favoritesActionsCreators/favoritesActionsCreators";
 import { IBookInfo } from "../../../types/booksTypes/booksTypes";
 import Icon from "./Icon/Icon";
+import { favoriteBooksSelector } from "../../../redux/selectors/favoritesSelector/favoritesSelector";
 
 const BackgroundLike = styled.div`
   width: 56px;
@@ -39,13 +40,28 @@ const Like = ({ book }: IBookProps) => {
 
     const [active, setActive] = useState(false);
 
-    const setFavoritesBooks = () => {
-        if (active) {
-            dispatch(favoritesActionCreators.deleteFavoritesBooks(book.isbn13));
-            setActive(false);
+    const favorites = useAppSelector(favoriteBooksSelector);
+
+    const isAdd = useCallback((favorites: IBookInfo[] | []) => {
+        let arr = favorites.filter(item => item.isbn13 === book.isbn13);
+        return !!arr.length;
+    }, [book.isbn13])
+
+    useEffect(() => {
+        if(isAdd(favorites)){
+            setActive(true);
         } else {
+            setActive(false);
+        }
+    }, [favorites, isAdd]);
+
+    const setFavoritesBooks = () => {
+        if(!isAdd(favorites)){
             dispatch(favoritesActionCreators.addFavoritesBooks(book));
             setActive(true);
+        } else {
+            dispatch(favoritesActionCreators.deleteFavoritesBooks(book.isbn13));
+            setActive(false);
         }
     };
 
