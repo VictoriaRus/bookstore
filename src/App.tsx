@@ -22,8 +22,8 @@ const App = () => {
               <Route path="/sign-in" element={ <SignInPage /> } />
               <Route path="/sign-up" element={ <SignUpPage /> } />
               <Route path="activate/:uid/:token" element={ <ActivationPage /> } />
-              <Route element={ <PersistLogin/> }>
-                  <Route path="/cart" element={ <CartPage /> } />
+              <Route path="/cart" element={ <CartPage /> } />
+              <Route element={ <PersistLogin /> }>
                   <Route path="/favorites" element={ <FavoritesPage /> } />
                   <Route path="/account" element={ <AccountPage /> } />
               </Route>

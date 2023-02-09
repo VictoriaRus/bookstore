@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Container from "../../Container/Container";
 import Flex from "../../Flex/Flex";
@@ -6,10 +6,10 @@ import useWindowSize from "../../../../hooks/useWindowSize/useWindowSize";
 import NavDesktop from "../Navigation/NavDesktop/NavDesktop";
 import NavTablet from "../Navigation/NavTablet/NavTablet";
 import MenuBurgerTablet from "../Burger/MenuBurgerTablet/MenuBurgerTablet";
-import MenuBurgerMobile from "../Burger/MenuBurgerMobile/MenuBurgerMobile";
 import { useLocation } from "react-router";
 import { useAppSelector } from "../../../../redux/hooks/hooks";
 import { filterBooksSelector } from "../../../../redux/selectors/booksSelector/booksSelector";
+import MenuBurgerMobile from "../Burger/MenuBurgerMobile/MenuBurgerMobile";
 
 const StyledHeader = styled.div`
   position: relative;
@@ -46,17 +46,21 @@ const Header = () => {
         setIsOpenMenu(prevState => !prevState);
     }
 
+    const handledMenu = () => {
+        setIsOpenMenu(false);
+    }
+
     return (
         <StyledHeader>
             <Container>
                 <FlexHeader>
                     {
-                        size.width > 768 ? <NavDesktop /> : <NavTablet handledBurger={ handledBurger } />
+                        size.width > 768 ? <NavDesktop /> : <NavTablet active={ isOpenMenu } handledBurger={ handledBurger } />
                     }
                 </FlexHeader>
             </Container>
             { isOpenMenu &&
-                (size.width > 414 ? <MenuBurgerTablet /> : <MenuBurgerMobile />)
+                (size.width > 414 ? <MenuBurgerTablet setActive={ handledMenu } /> : <MenuBurgerMobile/>)
             }
         </StyledHeader>
     );

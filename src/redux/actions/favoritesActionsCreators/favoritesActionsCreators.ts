@@ -1,6 +1,6 @@
-import {InferActionTypes} from "../../store/store";
-import {ADD_FAVORITES_BOOKS, DELETE_FAVORITES_BOOKS} from "../actions";
-import {IBookInfo} from "../../../types/booksTypes/booksTypes";
+import { InferActionTypes } from "../../store/store";
+import { ADD_FAVORITES_BOOKS, DELETE_FAVORITES_BOOKS } from "../actions";
+import { IBookInfo } from "../../../types/booksTypes/booksTypes";
 
 export const favoritesActionCreators = {
     addFavoritesBooks: (data: IBookInfo) => {

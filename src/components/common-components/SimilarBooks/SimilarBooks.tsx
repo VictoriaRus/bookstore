@@ -33,7 +33,7 @@ const SimilarBooks = () => {
     }, [books]);
 
     return (
-        <BooksList bottomLine='-1' books={ randomBooks }/>
+        <BooksList bottomLine="-1" books={ randomBooks }/>
     );
 };
 

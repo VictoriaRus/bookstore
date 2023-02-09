@@ -9,9 +9,10 @@ import { BASE_CONTENT_API } from "../../../api/api";
 import TabGroup from "../TabGroup/TabGroup";
 import { IBookInfo } from "../../../types/booksTypes/booksTypes";
 import Stars from "../../common-components/Stars/Stars";
-import { useAppSelector } from "../../../redux/hooks/hooks";
+import {useAppDispatch, useAppSelector} from "../../../redux/hooks/hooks";
 import { isAuthSelector } from "../../../redux/selectors/authSelector/authSelector";
 import { COLORS, getColor, MOBILE_WIDTH, TABLET_WIDTH } from "../../../mock-data/constants";
+import { cartActionCreators } from "../../../redux/actions/cartActionsCreators/cartActionsCreators";
 
 interface IColumnProps {
     width: string;
@@ -105,6 +106,7 @@ interface IBookProps {
 
 const Book = ({ isbn13 }: IBookProps) => {
     const isAuth = useAppSelector(isAuthSelector);
+    const dispatch = useAppDispatch();
 
     const [book, setBook] = useState<IBookInfo>({} as IBookInfo);
 
@@ -119,6 +121,10 @@ const Book = ({ isbn13 }: IBookProps) => {
             console.error(e);
         }
     }, [isbn13]);
+
+    const addToCart = () => {
+        dispatch(cartActionCreators.addBookToCart(book));
+    }
 
     return (
         <>
@@ -155,7 +161,7 @@ const Book = ({ isbn13 }: IBookProps) => {
                         </Item>
                     </WrapBook>
                     <WrapButton>
-                        <Button text="add to cart"/>
+                        <Button text="add to cart" onClick={ addToCart }/>
                     </WrapButton>
                     <Info>Preview book</Info>
                 </Column>

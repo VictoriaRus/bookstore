@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import Burger, { IBurgerProps } from "../../Burger/Burger";
+import Burger from "../../Burger/Burger";
 import Flex from "../../../Flex/Flex";
 import Bag from "../../../../../assets/icons/Bag.svg";
 import { StyledIcon } from "../NavDesktop/NavDesktop";
 import Logo from "../../../Logo/Logo";
 
-const NavTablet = ({ handledBurger }:IBurgerProps) => {
+interface IProps{
+    handledBurger: () => void;
+    active: boolean;
+}
+
+const NavTablet = ({ handledBurger, active }: IProps) => {
 
     return (
         <>
@@ -17,7 +22,7 @@ const NavTablet = ({ handledBurger }:IBurgerProps) => {
                 <Link to="/cart">
                     <StyledIcon src={ Bag } />
                 </Link>
-                <Burger handledBurger={ handledBurger } />
+                <Burger handledBurger={ handledBurger } active={ active }/>
             </Flex>
         </>
     );

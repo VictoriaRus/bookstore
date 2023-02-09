@@ -5,14 +5,14 @@ import { ADD_FAVORITES_BOOKS, DELETE_FAVORITES_BOOKS } from "../../actions/actio
 
 interface IInitialFavoritesState {
     books: IBookInfo[] | [];
-    isLoading: boolean;
-    error: null | string;
+    //isLoading: boolean;
+    //error: null | string;
 }
 
 const initialState: IInitialFavoritesState = {
     books: [],
-    isLoading: false,
-    error: null,
+    //isLoading: false,
+    //error: null,
 }
 
 const favoritesReducer: Reducer<IInitialFavoritesState, FavoritesActionType> = (state = initialState, { type, payload }: any)=>{

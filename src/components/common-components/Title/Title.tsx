@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { TABLET_WIDTH } from "../../../mock-data/constants";
 
@@ -12,7 +11,7 @@ interface ITitleProps {
 }
 
 const Title = styled.h2<ITitleProps>`
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: ${ props => props.fontSize || "56" }px;

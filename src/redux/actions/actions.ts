@@ -19,4 +19,8 @@ export const LOGOUT = "LOGOUT" as const;
 export const ADD_FAVORITES_BOOKS = "ADD_FAVORITES_BOOKS" as const;
 export const DELETE_FAVORITES_BOOKS = "DELETE_FAVORITES_BOOKS" as const;
 
-
+//cart
+export const ADD_BOOK_TO_CART = "ADD_BOOK_TO_CART" as const;
+export const CHANGE_COUNT_BOOK_CART = "CHANGE_COUNT_BOOK_CART" as const;
+export const CHANGE_CART = "CHANGE_CART" as const;
+export const DELETE_BOOK_FROM_CART = "DELETE_BOOK_FROM_CART" as const;

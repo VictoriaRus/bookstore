@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Photo from "../../common-components/Photo/Photo";
 import Title from "../../common-components/Title/Title";
 import SecondaryTitle from "../../common-components/SecondaryTitle/SecondaryTitle";
-import Like from "../../../assets/icons/Favorite.png";
 import Stars from "../../common-components/Stars/Stars";
 import { favoritesActionCreators } from "../../../redux/actions/favoritesActionsCreators/favoritesActionsCreators";
 import { useAppDispatch } from "../../../redux/hooks/hooks";

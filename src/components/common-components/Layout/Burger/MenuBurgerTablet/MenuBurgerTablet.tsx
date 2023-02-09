@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../../../redux/hooks/hooks
 import { isAuthSelector } from "../../../../../redux/selectors/authSelector/authSelector";
 import { authActionCreators } from "../../../../../redux/actions/authActionCreators/authActionCreators";
 
-const BackStyled = styled.div`
+const Back = styled.div`
   position: absolute;
   background-color: rgba(49, 48, 55, 0.5);
   top: 0;
@@ -18,7 +18,7 @@ const BackStyled = styled.div`
   z-index: 50;
 `;
 
-const MenuStyled = styled.div`
+const Menu = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -54,7 +54,11 @@ const Links = styled.div`
   text-align: center;
 `;
 
-const MenuBurgerTablet = () => {
+interface IProps {
+    setActive: () => void;
+}
+
+const MenuBurgerTablet = ({ setActive }: IProps) => {
     const isAuth = useAppSelector(isAuthSelector);
     const dispatch = useAppDispatch();
 
@@ -70,9 +74,13 @@ const MenuBurgerTablet = () => {
         }
     }, []);
 
+    const closeMenu = () => {
+        setActive();
+    }
+
     return (
-        <BackStyled>
-            <MenuStyled>
+        <Back onClick={ closeMenu }>
+            <Menu onClick={ (e) => e.stopPropagation() }>
                 <div>
                     <BurgerHeader/>
                     <Search width="287" placeholder="Search"/>
@@ -87,13 +95,13 @@ const MenuBurgerTablet = () => {
                         </Links>
                     }
                 </div>
-                { isAuth ? <Button mobileWidth="288" onClick={ onLogout } text="log out" /> :
+                { isAuth ? <Button mobileWidth="288" onClick={ onLogout } text="log out"/> :
                     <Link to="/sign-in">
-                        <Button mobileWidth="288" text="sign in" />
+                        <Button mobileWidth="288" text="sign in"/>
                     </Link>
                 }
-            </MenuStyled>
-        </BackStyled>
+            </Menu>
+        </Back>
     );
 };
 

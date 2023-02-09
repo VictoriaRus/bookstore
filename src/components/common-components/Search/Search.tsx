@@ -5,6 +5,7 @@ import Input from "../Input/Input";
 import { booksActionCreators } from "../../../redux/actions/booksActionsCreators/booksActionsCreators";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks/hooks";
 import { filterBooksSelector } from "../../../redux/selectors/booksSelector/booksSelector";
+import {useNavigate} from "react-router";
 
 interface ISearchProps {
     width?: string;
@@ -39,6 +40,7 @@ const Icon = styled.span`
 `;
 
 const Search = ({ width, placeholder }: ISearchProps) => {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const filter = useAppSelector(filterBooksSelector);
 
@@ -52,11 +54,16 @@ const Search = ({ width, placeholder }: ISearchProps) => {
         setSearchForm(prevState => ({ ...prevState, searchText: filter }));
     }, [filter]);
 
+    const redirect = useCallback(() => {
+        navigate(`/main`);
+    }, [navigate]);
+
     return (
         <Wrap>
             <form onSubmit={ (e) => {
                 e.preventDefault();
                 dispatch(booksActionCreators.getBooksWithFilter(searchForm.searchText));
+                redirect();
             }}>
                 <Input value={ searchForm.searchText } fieldName="searchText" onChange={ onSearchTextChange }
                        width={ width } placeholder={ placeholder }/>
